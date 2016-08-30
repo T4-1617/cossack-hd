@@ -10,6 +10,14 @@ namespace New_ConsoleApp
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Vad är ditt förnamn?");
+            string first_name = Console.ReadLine();
+            Console.WriteLine("Tack! Vad heter du i efternamn?");
+            string last_name = Console.ReadLine();
+
+            Console.WriteLine("Hej, " + first_name + " " + last_name + "!");
+
+            Console.ReadKey();
         }
     }
 }
