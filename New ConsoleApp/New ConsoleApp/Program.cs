@@ -15,7 +15,7 @@ namespace New_ConsoleApp
             Console.WriteLine("Tack! Vad heter du i efternamn?");
             string last_name = Console.ReadLine();
 
-            Console.WriteLine("Hej, " + first_name + " " + last_name + "!");
+            Console.WriteLine("Hej, " + first_name + "!");
 
             Console.ReadKey();
         }
