@@ -17,12 +17,26 @@ namespace Uppgift_Windows_Form_App
             InitializeComponent();
         }
 
-        private void btnAction_Click(object sender, EventArgs e)
+
+        private void control_and_show()
         {
-            if (txbName != "" && txbLastName != "")
-                MessageBox.Show("Hej, " + txbName.Text + " " + txbLastName.Text+"!");
+            if (txbName.Text != "" && txbLastName.Text != "")
+                MessageBox.Show("Hej, " + txbName.Text + " " + txbLastName.Text + "!");
             else
                 MessageBox.Show("Du har inte matat in fullständig information.");
+        }
+
+
+        private void btnAction_Click(object sender, EventArgs e)
+        {
+            control_and_show();
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+                control_and_show();
+        
         }
     }
 }
