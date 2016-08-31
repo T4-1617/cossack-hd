@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txbNumb1 = new System.Windows.Forms.TextBox();
+            this.txbNumb2 = new System.Windows.Forms.TextBox();
             this.grpBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.rbtnPlus = new System.Windows.Forms.RadioButton();
+            this.rbtnMinus = new System.Windows.Forms.RadioButton();
+            this.rbtnDivide = new System.Windows.Forms.RadioButton();
+            this.rbtnMult = new System.Windows.Forms.RadioButton();
             this.lblNumb1 = new System.Windows.Forms.Label();
             this.lblNumb2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -43,26 +43,26 @@
             this.grpBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txbNumb1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 31);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.txbNumb1.Location = new System.Drawing.Point(12, 31);
+            this.txbNumb1.Name = "txbNumb1";
+            this.txbNumb1.Size = new System.Drawing.Size(100, 20);
+            this.txbNumb1.TabIndex = 0;
             // 
-            // textBox2
+            // txbNumb2
             // 
-            this.textBox2.Location = new System.Drawing.Point(333, 29);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 1;
+            this.txbNumb2.Location = new System.Drawing.Point(333, 29);
+            this.txbNumb2.Name = "txbNumb2";
+            this.txbNumb2.Size = new System.Drawing.Size(100, 20);
+            this.txbNumb2.TabIndex = 1;
             // 
             // grpBox1
             // 
-            this.grpBox1.Controls.Add(this.radioButton4);
-            this.grpBox1.Controls.Add(this.radioButton3);
-            this.grpBox1.Controls.Add(this.radioButton2);
-            this.grpBox1.Controls.Add(this.radioButton1);
+            this.grpBox1.Controls.Add(this.rbtnMult);
+            this.grpBox1.Controls.Add(this.rbtnDivide);
+            this.grpBox1.Controls.Add(this.rbtnMinus);
+            this.grpBox1.Controls.Add(this.rbtnPlus);
             this.grpBox1.Location = new System.Drawing.Point(119, 12);
             this.grpBox1.Name = "grpBox1";
             this.grpBox1.Size = new System.Drawing.Size(207, 73);
@@ -70,49 +70,50 @@
             this.grpBox1.TabStop = false;
             this.grpBox1.Text = "Operation";
             // 
-            // radioButton1
+            // rbtnPlus
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(7, 20);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(59, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "+ (plus)";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbtnPlus.AutoSize = true;
+            this.rbtnPlus.Checked = true;
+            this.rbtnPlus.Location = new System.Drawing.Point(7, 20);
+            this.rbtnPlus.Name = "rbtnPlus";
+            this.rbtnPlus.Size = new System.Drawing.Size(59, 17);
+            this.rbtnPlus.TabIndex = 0;
+            this.rbtnPlus.TabStop = true;
+            this.rbtnPlus.Text = "+ (plus)";
+            this.rbtnPlus.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rbtnMinus
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(121, 20);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(64, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "- (minus)";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbtnMinus.AutoSize = true;
+            this.rbtnMinus.Location = new System.Drawing.Point(121, 20);
+            this.rbtnMinus.Name = "rbtnMinus";
+            this.rbtnMinus.Size = new System.Drawing.Size(64, 17);
+            this.rbtnMinus.TabIndex = 1;
+            this.rbtnMinus.TabStop = true;
+            this.rbtnMinus.Text = "- (minus)";
+            this.rbtnMinus.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // rbtnDivide
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(7, 43);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(99, 17);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "/ (dividera med)";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rbtnDivide.AutoSize = true;
+            this.rbtnDivide.Location = new System.Drawing.Point(7, 43);
+            this.rbtnDivide.Name = "rbtnDivide";
+            this.rbtnDivide.Size = new System.Drawing.Size(99, 17);
+            this.rbtnDivide.TabIndex = 2;
+            this.rbtnDivide.TabStop = true;
+            this.rbtnDivide.Text = "/ (dividera med)";
+            this.rbtnDivide.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // rbtnMult
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(121, 43);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(72, 17);
-            this.radioButton4.TabIndex = 3;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "x (gånger)";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.rbtnMult.AutoSize = true;
+            this.rbtnMult.Location = new System.Drawing.Point(121, 43);
+            this.rbtnMult.Name = "rbtnMult";
+            this.rbtnMult.Size = new System.Drawing.Size(72, 17);
+            this.rbtnMult.TabIndex = 3;
+            this.rbtnMult.TabStop = true;
+            this.rbtnMult.Text = "x (gånger)";
+            this.rbtnMult.UseVisualStyleBackColor = true;
             // 
             // lblNumb1
             // 
@@ -141,6 +142,7 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "KÖR";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lsBoxResults
             // 
@@ -170,8 +172,8 @@
             this.Controls.Add(this.lblNumb2);
             this.Controls.Add(this.lblNumb1);
             this.Controls.Add(this.grpBox1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txbNumb2);
+            this.Controls.Add(this.txbNumb1);
             this.Name = "Form1";
             this.Text = "Kalkylator";
             this.grpBox1.ResumeLayout(false);
@@ -183,13 +185,13 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txbNumb1;
+        private System.Windows.Forms.TextBox txbNumb2;
         private System.Windows.Forms.GroupBox grpBox1;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbtnMult;
+        private System.Windows.Forms.RadioButton rbtnDivide;
+        private System.Windows.Forms.RadioButton rbtnMinus;
+        private System.Windows.Forms.RadioButton rbtnPlus;
         private System.Windows.Forms.Label lblNumb1;
         private System.Windows.Forms.Label lblNumb2;
         private System.Windows.Forms.Button button1;
