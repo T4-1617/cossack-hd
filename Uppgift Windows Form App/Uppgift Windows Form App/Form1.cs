@@ -32,11 +32,14 @@ namespace Uppgift_Windows_Form_App
             control_and_show();
         }
 
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Return)
+            
+            if (e.KeyCode == Keys.Enter)
+            {
                 control_and_show();
-        
+            }
         }
     }
 }
+
