@@ -18,6 +18,7 @@ namespace BattleShip_Remastered
 
         static void Main(string[] args)
         {
+            //handles launch argument (debug)
             if (args.Length != 0)
             {
                 if (args[0] == "-debug")
@@ -40,6 +41,7 @@ namespace BattleShip_Remastered
                 }
             }
 
+            //creating ships
             for (int i = 0; i < random_amount_of_bs;)
             {
                 int Xpos = r.Next(0, 6);
@@ -52,18 +54,20 @@ namespace BattleShip_Remastered
 
             }
 
-            drawmap();
+            drawmap(); //draw the map before the game begins
 
             int shots_fired = 0;
 
-            for (int number_of_living_bs = random_amount_of_bs; 0 < number_of_living_bs;)
+
+            //game loop, works until all ships are dead
+            for (int number_of_living_bs = random_amount_of_bs; 0 < number_of_living_bs;) 
             {
                 
                 Console.WriteLine("Skriv koordinater i format \"A1\"");
                 string input = Console.ReadLine();
                 Console.Clear();
 
-                if (input.Length == 2 && char.IsLetter(input[0]) && char.IsDigit(input[1]))
+                if (input.Length == 2 && char.IsLetter(input[0]) && char.IsDigit(input[1])) //checks types of characters
                 {
                     int coord_letter = Char.ToUpper(input[0]) - 64; //TSO! transforms character to alphabetical position
                     int coord_digit = int.Parse(input[1].ToString()); //transofrms second character in input to int via string
@@ -80,12 +84,11 @@ namespace BattleShip_Remastered
                             GameMap[coord_letter - 1, coord_digit - 1] = 'X';
                             if (number_of_living_bs > 0)
                             {
-                                Console.WriteLine("");
-                                Console.WriteLine("Du träffade ett skepp! Nu finns det " + number_of_living_bs + " skepp kvar!");
                                 Console.Beep(2000, 300);
+                                Console.WriteLine("Du träffade ett skepp! Nu finns det " + number_of_living_bs + " skepp kvar!");
                                 Console.Beep(3000, 500);
                             }
-                            else
+                            else //all ships are down
                             {
                                 Console.WriteLine("");
                                 Console.WriteLine(
@@ -102,10 +105,10 @@ namespace BattleShip_Remastered
                         }
                         else //missed
                         {
-                            Console.Beep(2000, 300);
-                            Console.Beep(1000, 500);
+                            Console.Beep(2000, 300); 
                             GameMap[coord_letter - 1, coord_digit - 1] = '.';
                             Console.WriteLine("Du missade! Det finns " + number_of_living_bs + " skepp kvar!");
+                            Console.Beep(1000, 500);
 
                         }
                         Console.WriteLine("");
@@ -116,17 +119,17 @@ namespace BattleShip_Remastered
                     else //out of range
                     {
                         Console.Beep(500, 500);
-                        Console.Beep(500, 250);
                         drawmap();
                         Console.WriteLine("Dina skott måste gå mellan A1 och G5 (inklusive)");
+                        Console.Beep(500, 250);
                     }
                 }
                 else //improper input format
                 {
                     Console.Beep(500, 500);
-                    Console.Beep(500, 250);
                     drawmap();
-                    Console.WriteLine("Skriv in ordentliga koordinater, t.ex B3");
+                    Console.WriteLine("Skriv in ordentliga koordinater, t.ex B3 (b3 går bra också)");
+                    Console.Beep(500, 250);
                 }
 
 
@@ -191,7 +194,7 @@ namespace BattleShip_Remastered
 
         static void playmelody()
         {
-
+            //tones in Hz for usage in the sequence
             int a4 = 440*2;
             int b4 = 494*2;
             int c4 = 523*2;
@@ -200,6 +203,7 @@ namespace BattleShip_Remastered
             int f4 = 698*2;
             int g4 = 783*2;
 
+            //sequence
             Console.Beep(f4, 400);
             Console.Beep(g4, 200);
             Console.Beep(f4, 200);
