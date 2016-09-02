@@ -10,12 +10,38 @@ namespace BattleShip_Remastered
     {
         //declare common variables here
 
-        
+        static char waterchar = '~';
+        static char shipchar = 'U';
+
+        static char[,] GameMap = new char[7, 5]; //creates game field with chars for efficient management
 
         static void Main(string[] args)
         {
+            //creating battleships
+            Random r = new Random(); //creating random generator
+            int random_amount_of_bs = r.Next(3, 6); //generating random value for the ships
 
-            //create game field 2D array
+            //filling the battlemap with water
+            for (int y = 0; y < 5; y++)
+            {
+                for (int x = 0; x < 7; x++)
+                {
+                    GameMap[x, y] = waterchar;
+                }
+            }
+
+            for (int i = 0; i < random_amount_of_bs; i++)
+            {
+                int Xpos = r.Next(0, 6);
+                int Ypos = r.Next(0, 4);
+                if (check_ship_exists(Xpos, Ypos) != true) //Calls check_ship_exists if a cordinate is empty
+                {
+                    GameMap[Xpos, Ypos] = shipchar; //set ship as living
+                }
+
+            }
+
+            drawmap();
 
             //create random amount of ships
 
@@ -32,9 +58,42 @@ namespace BattleShip_Remastered
             //all ships are down -> exit loop, end game screen
 
 
+            Console.ReadLine();
 
-            
 
         }
+
+
+        //functions
+
+        static void drawmap()
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                for (int x = 0; x < 7; x++)
+                {
+                    Console.Write(GameMap[x, y]);
+                    
+                }
+            Console.WriteLine();
+            }
+
+
+
+        }
+
+        //util to check if a ship exists in the giving position, returns bool
+        static bool check_ship_exists(int x, int y)
+        {
+            if (GameMap[x, y] == shipchar)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
