@@ -12,11 +12,21 @@ namespace BattleShip_Remastered
 
         static char waterchar = '~';
         static char shipchar = 'U';
+        static bool use_debug = false;
 
         static char[,] GameMap = new char[7, 5]; //creates game field with chars for efficient management
 
         static void Main(string[] args)
         {
+            if (args.Length != 0)
+                {
+                if (args[0] == "-debug")
+                { 
+                    Console.WriteLine("DEBUG MODE");
+                    use_debug = true;
+                }
+            }
+
             //creating battleships
             Random r = new Random(); //creating random generator
             int random_amount_of_bs = r.Next(3, 6); //generating random value for the ships
@@ -43,7 +53,7 @@ namespace BattleShip_Remastered
 
             drawmap();
 
-            //create random amount of ships
+            
 
             //start game loop until ships are 0
 
@@ -68,14 +78,17 @@ namespace BattleShip_Remastered
 
         static void drawmap()
         {
+            Console.WriteLine(" ABCDEFG");
             for (int y = 0; y < 4; y++)
             {
+                Console.Write(y.ToString());
                 for (int x = 0; x < 7; x++)
                 {
                     Console.Write(GameMap[x, y]);
                     
                 }
-            Console.WriteLine();
+                Console.WriteLine();
+                
             }
 
 
