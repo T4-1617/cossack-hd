@@ -40,12 +40,13 @@ namespace BattleShip_Remastered
                 }
             }
 
-            for (int i = 0; i < random_amount_of_bs; i++)
+            for (int i = 0; i < random_amount_of_bs;)
             {
                 int Xpos = r.Next(0, 6);
                 int Ypos = r.Next(0, 4);
                 if (check_ship_exists(Xpos, Ypos) != true) //Calls check_ship_exists if a cordinate is empty
                 {
+                    i++;
                     GameMap[Xpos, Ypos] = shipchar; //set ship as living
                 }
 
@@ -53,19 +54,84 @@ namespace BattleShip_Remastered
 
             drawmap();
 
+            int shots_fired = 0;
+
+            for (int number_of_living_bs = random_amount_of_bs; 0 < number_of_living_bs;)
+            {
+                
+                Console.WriteLine("Skriv koordinater i format \"A1\"");
+                string input = Console.ReadLine();
+                Console.Clear();
+
+                if (input.Length == 2 && char.IsLetter(input[0]) && char.IsDigit(input[1]))
+                {
+                    int coord_letter = Char.ToUpper(input[0]) - 64; //TSO! transforms character to alphabetical position
+                    int coord_digit = int.Parse(input[1].ToString()); //transofrms second character in input to int via string
+                    shots_fired++;
+
+                    if (use_debug)
+                        Console.WriteLine("Inskrivna koordinater i int : " + coord_letter.ToString() + " " + coord_digit.ToString());
+
+                    if (coord_letter > 0 && coord_letter < 8 && coord_digit > 0 && coord_digit < 6)
+                    {
+                        if (check_ship_exists(coord_letter - 1, coord_digit - 1))
+                        {
+                            number_of_living_bs--;
+                            GameMap[coord_letter - 1, coord_digit - 1] = 'X';
+                            if (number_of_living_bs > 0)
+                            {
+                                Console.WriteLine("");
+                                Console.WriteLine("Du träffade ett skepp! Nu finns det " + number_of_living_bs + " skepp kvar!");
+                                Console.Beep(2000, 300);
+                                Console.Beep(3000, 500);
+                            }
+                            else
+                            {
+                                Console.WriteLine("");
+                                Console.WriteLine(
+                                    "Du vann efter "
+                                    + shots_fired
+                                    + " skott och sänkte "
+                                    + random_amount_of_bs
+                                    +" skepp!");
+
+                                playmelody();
+
+                            }
+
+                        }
+                        else //missed
+                        {
+                            Console.Beep(2000, 300);
+                            Console.Beep(1000, 500);
+                            GameMap[coord_letter - 1, coord_digit - 1] = '.';
+                            Console.WriteLine("Du missade! Det finns " + number_of_living_bs + " skepp kvar!");
+
+                        }
+                        Console.WriteLine("");
+                        Console.WriteLine("Skott avfyrade: " + shots_fired);
+                        drawmap();
+                    }
+
+                    else //out of range
+                    {
+                        Console.Beep(500, 500);
+                        Console.Beep(500, 250);
+                        drawmap();
+                        Console.WriteLine("Dina skott måste gå mellan A1 och G5 (inklusive)");
+                    }
+                }
+                else //improper input format
+                {
+                    Console.Beep(500, 500);
+                    Console.Beep(500, 250);
+                    drawmap();
+                    Console.WriteLine("Skriv in ordentliga koordinater, t.ex B3");
+                }
 
 
-            //start game loop until ships are 0
+            }
 
-            //1. display field
-
-            //receive coordinates
-
-            //check coordinates
-
-            //there are living ships -> goto 1
-
-            //all ships are down -> exit loop, end game screen
 
 
             Console.ReadLine();
@@ -78,31 +144,31 @@ namespace BattleShip_Remastered
 
         static void drawmap()
         {
-            Console.WriteLine(" ABCDEFG");
-            for (int y = 0; y < 4; y++)
+            Console.WriteLine(" ABCDEFG"); //adds alphabetical reference line
+            for (int y = 0; y < 5; y++)
             {
-                Console.Write(y.ToString());
+                Console.Write((y+1).ToString()); //adds numerical reference line
                 for (int x = 0; x < 7; x++)
                 {
-                    if (GameMap[x, y] == shipchar)
+                    if (GameMap[x, y] == shipchar) //special case, handling differently depending on debug
                     {
                         switch (use_debug)
                         {
                             case true:
-                                Console.Write(shipchar);
+                                Console.Write(shipchar); //show ship as is
                                 break;
                             case false:
-                                Console.Write(waterchar);
+                                Console.Write(waterchar); //shows ships as water
                                 break;
                         }
                     }
                     else
                     { 
-                    Console.Write(GameMap[x, y]);
+                    Console.Write(GameMap[x, y]); //it's not a ship, show as is
                     }
 
                 }
-                Console.WriteLine();
+                Console.WriteLine(); //skip to next line
 
             }
 
@@ -121,6 +187,32 @@ namespace BattleShip_Remastered
             {
                 return false;
             }
+        }
+
+        static void playmelody()
+        {
+
+            int a4 = 440*2;
+            int b4 = 494*2;
+            int c4 = 523*2;
+            int d4 = 587*2;
+            int e4 = 660*2;
+            int f4 = 698*2;
+            int g4 = 783*2;
+
+            Console.Beep(f4, 400);
+            Console.Beep(g4, 200);
+            Console.Beep(f4, 200);
+
+            Console.Beep(e4, 400);
+            Console.Beep(c4, 400);
+
+            Console.Beep(a4 / 1, 400);
+            Console.Beep(g4 / 2, 200);
+            Console.Beep(a4 / 1, 200);
+            Console.Beep(b4 / 1, 800);
+
+
         }
 
     }
