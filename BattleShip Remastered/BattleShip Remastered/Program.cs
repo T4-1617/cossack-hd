@@ -19,9 +19,9 @@ namespace BattleShip_Remastered
         static void Main(string[] args)
         {
             if (args.Length != 0)
-                {
+            {
                 if (args[0] == "-debug")
-                { 
+                {
                     Console.WriteLine("DEBUG MODE");
                     use_debug = true;
                 }
@@ -53,7 +53,7 @@ namespace BattleShip_Remastered
 
             drawmap();
 
-            
+
 
             //start game loop until ships are 0
 
@@ -84,11 +84,26 @@ namespace BattleShip_Remastered
                 Console.Write(y.ToString());
                 for (int x = 0; x < 7; x++)
                 {
+                    if (GameMap[x, y] == shipchar)
+                    {
+                        switch (use_debug)
+                        {
+                            case true:
+                                Console.Write(shipchar);
+                                break;
+                            case false:
+                                Console.Write(waterchar);
+                                break;
+                        }
+                    }
+                    else
+                    { 
                     Console.Write(GameMap[x, y]);
-                    
+                    }
+
                 }
                 Console.WriteLine();
-                
+
             }
 
 
