@@ -12,6 +12,7 @@ namespace KortSpel
         static string[,] cardsnames = new string[4, 13]; //used for card names
         static bool[,] cardsnumbs = new bool[4, 13]; //used for card status
         static Random randomgenerator = new Random();
+        static int points = 0;
 
         static void Main(string[] args)
         {
@@ -27,8 +28,8 @@ namespace KortSpel
                 {
                     i--;
                     Console.Write(String.Format("Ditt kort nummer {0} är ", (52 - i)));
-                    verifyandgivecard(); //prints card's name
-                    Console.Write(String.Format(" och det finns {0} kort kvar. ", (i)));
+                    points = points + verifyandgivecard(); //prints card's name, adds points
+                    Console.Write(String.Format(", du har {0} poäng och det finns {1} kort kvar. ", points, (i)));
                     Console.WriteLine();
                 }
             }
@@ -49,8 +50,6 @@ namespace KortSpel
                 for (int n = 0; n < 13; n++) //count cards inside a type
                 {
                     cardsnumbs[t, n] = false;
-
-
                 }
             }
         }
@@ -109,21 +108,21 @@ namespace KortSpel
         }
 
 
-        static bool verifyandgivecard()
+        static int verifyandgivecard() //recursive function 
         {
             int randomtype = randomgenerator.Next(0, 4);
             int randomnumber = randomgenerator.Next(0, 13);
 
-            if (cardsnumbs[randomtype, randomnumber] == true)
+            if (cardsnumbs[randomtype, randomnumber] == true) //if the card is already given
             {
-                verifyandgivecard();
-                return true;
+                return verifyandgivecard(); //find another
             }
             else
             {
-                Console.Write(cardsnames[randomtype, randomnumber]);
+                Console.Write(cardsnames[randomtype, randomnumber]); //or give new card and shot it
                 cardsnumbs[randomtype, randomnumber] = true;
-                return true;
+                return (randomnumber + 1);
+
             }
         }
 
