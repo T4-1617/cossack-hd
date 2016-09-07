@@ -11,7 +11,7 @@ namespace KortSpel
 
         static Random randomgenerator = new Random();
         static int score;
-        static int cardsleft = 104;
+        static int cardsleft = 103;
         static bool[,] cardBools = new bool[8, 13]; //used for card status
         static bool keepPlaying = true;
 
@@ -25,7 +25,7 @@ namespace KortSpel
                 Console.Clear();
                 if (cardsleft > 0)
                 {
-                    
+
                     for (score = 0; score < 21;)
                     {
                         if (playerinput("Tryck J för att få ett kort; tryck N för att avsluta."))
@@ -59,23 +59,22 @@ namespace KortSpel
 
                 if (score == 21)
                 {
-                    Console.WriteLine("Du vann!");
+                    Console.WriteLine("Du vann! Tryck Enter för att avsluta programmet.");
+                    keepPlaying = false;
+                    Console.ReadLine();
                 }
                 else if (score > 21)
                 {
                     Console.WriteLine(String.Format("Du fick {0} för många påäng.", (score - 21)));
                 }
 
-                if (cardsleft > 0)
+                if (cardsleft > 0 && keepPlaying)
                 {
                     //Console.Clear();
                     keepPlaying = playerinput("Tryck J för att börja om!");
                 }
-
-
             }
         }
-
 
 
 
@@ -93,20 +92,21 @@ namespace KortSpel
 
         static int giveCard()
         {
-            int randomtype = randomgenerator.Next(0, 8);
-            int randomnumber = randomgenerator.Next(0, 13);
-
-            if (cardBools[randomtype, randomnumber] == true)
+            int randomtype = 0;
+            int randomnumber = 0;
+            while (true)
             {
-                return giveCard();
-            }
-            else
-            {
-                cardBools[randomtype, randomnumber] = true;
-                printcardname(randomtype, randomnumber);
-                return (randomnumber + 1);
-            }
+                randomtype = randomgenerator.Next(0, 8);
+                randomnumber = randomgenerator.Next(0, 13);
 
+                if (cardBools[randomtype, randomnumber] == false) //if finds an unused card
+                {
+                    break;
+                }
+            }
+            cardBools[randomtype, randomnumber] = true; //sets the card as used
+            printcardname(randomtype, randomnumber); //calls print card name method for the given card
+            return (randomnumber + 1); //return score for the card
         }
 
         static bool playerinput(string message)
@@ -175,11 +175,6 @@ namespace KortSpel
                     }
                     break;
             }
-
-
-
-
-
         }
     }
 }
