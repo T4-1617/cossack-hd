@@ -9,43 +9,71 @@ namespace KortSpel
     class Program
     {
 
-
-        static bool[,] cardsnumbs = new bool[8, 13]; //used for card status
-
+        static Random randomgenerator = new Random();
+        static int score;
+        static bool[,] cardBools = new bool[8, 13]; //used for card status
 
         static void Main(string[] args)
         {
-
-            Console.WriteLine("TRYCK ENTER FÖR ATT BÖRJA");
-
-            Console.ReadLine();
-
-            generateCardArray();
-
-            for (int type = 0; type < 8; type++)
+            while (true)
             {
-                for (int number = 0; number < 13; number++)
+                Console.Clear();
+                Console.WriteLine("TRYCK ENTER FÖR ATT BÖRJA");
+
+
+                resetCardArray();
+
+                for (score = 0; score < 21;)
                 {
-                    printcardname(type, number);
+                    Console.ReadLine();
+
+                    score += giveCard();
                     Console.WriteLine();
+                    Console.WriteLine(score.ToString());
                 }
+                if (score == 21)
+                {
+                    Console.WriteLine("Du vann! Tryck J om du vill spela igen. Tryck N för att avsluta programmet.");
+                }
+                else
+                {
+                    Console.WriteLine(String.Format("Du fick {0} för många påäng. Tryck J om du vill spela igen. Tryck N för att avsluta programmet.", (score - 21)));
+                }
+
+                Console.ReadLine();
+
             }
-
-            Console.ReadLine();
-
-
         }
 
 
-        static void generateCardArray()
+        static void resetCardArray()
         {
             for (int t = 0; t < 8; t++) //count types
             {
                 for (int n = 0; n < 13; n++) //count cards inside a type
                 {
-                    cardsnumbs[t, n] = false; //set card as not given
+                    cardBools[t, n] = false; //set card as not given
                 }
             }
+        }
+
+
+        static int giveCard()
+        {
+            int randomtype = randomgenerator.Next(0, 8);
+            int randomnumber = randomgenerator.Next(0, 13);
+
+            if (cardBools[randomtype, randomnumber] == true)
+            {
+                return giveCard();
+            }
+            else
+            {
+                cardBools[randomtype, randomnumber] = true;
+                printcardname(randomtype, randomnumber);
+                return (randomnumber + 1);
+            }
+
         }
 
 
@@ -55,9 +83,9 @@ namespace KortSpel
 
             int localtype = type; //used in the switch below
 
-            if (localtype > 3)
+            if (localtype > 3) //if the type has to be repeated
             {
-                localtype -= 4;
+                localtype -= 4; //subtract by 4
             }
 
             switch (localtype)
@@ -97,6 +125,7 @@ namespace KortSpel
                     }
                     break;
             }
+
 
 
 
