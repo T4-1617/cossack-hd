@@ -11,39 +11,72 @@ namespace KortSpel
 
         static Random randomgenerator = new Random();
         static int score;
+        static int cardsleft = 104;
         static bool[,] cardBools = new bool[8, 13]; //used for card status
+        static bool keepPlaying = true;
 
         static void Main(string[] args)
         {
-            while (true)
+
+            resetCardArray();
+
+            while (keepPlaying)
             {
                 Console.Clear();
-                Console.WriteLine("TRYCK ENTER FÖR ATT BÖRJA");
-
-
-                resetCardArray();
-
-                for (score = 0; score < 21;)
+                if (cardsleft > 0)
                 {
-                    Console.ReadLine();
+                    
+                    for (score = 0; score < 21;)
+                    {
+                        if (playerinput("Tryck J för att få ett kort; tryck N för att avsluta."))
+                        {
+                            Console.Clear();
+                            score += giveCard();
 
-                    score += giveCard();
-                    Console.WriteLine();
-                    Console.WriteLine(score.ToString());
-                }
-                if (score == 21)
-                {
-                    Console.WriteLine("Du vann! Tryck J om du vill spela igen. Tryck N för att avsluta programmet.");
+                            cardsleft--;
+
+                            Console.WriteLine();
+                            Console.WriteLine(string.Format("Du har {0} poäng.", score.ToString()));
+                        }
+                        else
+                        {
+                            keepPlaying = false;
+                            Console.Clear();
+                            break;
+                        }
+
+                    }
                 }
                 else
                 {
-                    Console.WriteLine(String.Format("Du fick {0} för många påäng. Tryck J om du vill spela igen. Tryck N för att avsluta programmet.", (score - 21)));
+                    Console.WriteLine("Det är slut på kort! Tryck Enter för att avsluta.");
+                    Console.ReadLine();
+                    keepPlaying = false;
+
                 }
 
-                Console.ReadLine();
+
+
+                if (score == 21)
+                {
+                    Console.WriteLine("Du vann!");
+                }
+                else if (score > 21)
+                {
+                    Console.WriteLine(String.Format("Du fick {0} för många påäng.", (score - 21)));
+                }
+
+                if (cardsleft > 0)
+                {
+                    //Console.Clear();
+                    keepPlaying = playerinput("Tryck J för att börja om!");
+                }
+
 
             }
         }
+
+
 
 
         static void resetCardArray()
@@ -74,6 +107,23 @@ namespace KortSpel
                 return (randomnumber + 1);
             }
 
+        }
+
+        static bool playerinput(string message)
+        {
+            Console.WriteLine(message);
+            ConsoleKeyInfo key = Console.ReadKey();
+            char keychar = key.KeyChar;
+
+            switch (keychar)
+            {
+                case 'j':
+                    return true;
+                case 'n':
+                    return false;
+                default:
+                    return playerinput("message");
+            }
         }
 
 
