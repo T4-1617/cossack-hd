@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KortSpel
+namespace BlackJack_vs_PC
 {
     class Program
     {
 
         static Random randomgenerator = new Random();
-        static int score;
-        static int cardsleft = 103;
-        static bool[,] cardBools = new bool[8, 13]; //used for card status
+        static int playerscore;
+        static int pcscore;
+        static int cardsleft = 207;
+        static bool[,] cardBools = new bool[16, 13]; //used for card status
         static bool keepPlaying = true;
 
         static void Main(string[] args)
         {
+
 
             resetCardArray();
 
@@ -26,25 +28,29 @@ namespace KortSpel
                 if (cardsleft > 0)
                 {
 
-                    for (score = 0; score < 21;)
+                    for (playerscore = 0; playerscore < 21;)
                     {
                         if (playerinput("Tryck J för att få ett kort; tryck N för att avsluta."))
                         {
                             Console.Clear();
                             int cardscore = giveCard();
 
-                            if (cardscore>9) //card is 10, joker, king or queen
+                            //debug
+                            Console.WriteLine();
+                            Console.WriteLine("Cards left: " + cardsleft);
+
+                            if (cardscore > 9) //card is 10, joker, king or queen
                             {
                                 cardscore = 10; //all give 10 points
                             }
-                            if (cardscore == 1 && (21-score)>10)
+                            if (cardscore == 1 && (21 - playerscore) > 10)
                             {
                                 cardscore = 10;
                             }
-                            score += cardscore;
+                            playerscore += cardscore;
                             cardsleft--;
                             Console.WriteLine();
-                            Console.WriteLine(string.Format("Du har {0} poäng.", score.ToString()));
+                            Console.WriteLine(string.Format("Du har {0} poäng.", playerscore.ToString()));
                         }
                         else
                         {
@@ -60,15 +66,15 @@ namespace KortSpel
                     Console.ReadLine();
                     keepPlaying = false;
                 }
-                if (score == 21)
+                if (playerscore == -1)
                 {
                     Console.WriteLine("Du vann! Tryck Enter för att avsluta programmet.");
                     keepPlaying = false;
                     Console.ReadLine();
                 }
-                else if (score > 21)
+                else if (playerscore > 21)
                 {
-                    Console.WriteLine(String.Format("Du fick {0} för många påäng.", (score - 21)));
+                    Console.WriteLine(String.Format("Du fick {0} för många påäng.", (playerscore - 21)));
                 }
                 if (cardsleft > 0 && keepPlaying)
                 {
@@ -76,12 +82,19 @@ namespace KortSpel
                     keepPlaying = playerinput("Tryck J för att börja om!");
                 }
             }
+
         }
+    
+
+
+
+
+
 
 
         static void resetCardArray()
         {
-            for (int t = 0; t < 8; t++) //count types
+            for (int t = 0; t < 16; t++) //count types
             {
                 for (int n = 0; n < 13; n++) //count cards inside a type
                 {
@@ -97,7 +110,7 @@ namespace KortSpel
             int randomnumber = 0;
             while (true)
             {
-                randomtype = randomgenerator.Next(0, 8);
+                randomtype = randomgenerator.Next(0, 16);
                 randomnumber = randomgenerator.Next(0, 13);
 
                 if (cardBools[randomtype, randomnumber] == false) //if finds an unused card
@@ -128,7 +141,7 @@ namespace KortSpel
         }
 
 
-        
+
 
         //prints name of a card in one line
         static void printcardname(int type, int numb)
