@@ -15,8 +15,9 @@ namespace BlackJack_vs_PC
         static int pcpoints = 0;
         static int playerscore; //score is a variable for the current set of obtained cards
         static int pcscore;
-        static int cardsleft = 207;
-        static bool[,] cardBools = new bool[16, 13]; //used for card status
+        static int types = 16;
+        static int cardsleft = (types * 13) - 1;
+        static bool[,] cardBools = new bool[types, 13]; //used for card status
         static bool keepPlaying = true;
 
         static void Main(string[] args)
@@ -34,15 +35,19 @@ namespace BlackJack_vs_PC
                 //
                 while (pcscore < 21 && playerscore < 21 && keepPlaying)
                 {
-                    Console.Clear();
+                    
                     //PC's turn
                     if (pcsturn)
                     {
+                        Console.Clear();
                         pcscore += giveCard(false, false);
                         Console.WriteLine();
-                        Console.WriteLine(String.Format("Datorn har {0} kortpoäng!", pcscore));
-                        if (pcscore > 20)
-                            keepPlaying = false;
+                        Console.WriteLine(String.Format("Datorn har {0} kortpoäng! Du har {1} kortpoäng.", pcscore, playerscore));
+                        if (pcscore > 20 || cardsleft == 0)
+                            break;
+
+
+
                     }
 
 
@@ -52,6 +57,10 @@ namespace BlackJack_vs_PC
                         pcsturn = true;
                         Console.Clear();
                         playerscore += giveCard(true, false);
+
+                        if (playerscore > 21 || cardsleft == 0)
+                            break;
+
                         Console.WriteLine();
                         playerinput((String.Format("Du har {0} kortpoäng! Datorn ligger på {1}. Tryck J för att fortsätta.", playerscore, pcscore)));
                     }
@@ -64,7 +73,7 @@ namespace BlackJack_vs_PC
                         if (pcscore > 20)
                             keepPlaying = false;
                         Console.WriteLine();
-                        playerinput(String.Format("Datorn har {0} kortpoäng! Tryck J för att fortsätta.", pcscore));
+                        Console.WriteLine(String.Format("Datorn har {0} kortpoäng!", pcscore));
                     }
 
 
@@ -107,8 +116,20 @@ namespace BlackJack_vs_PC
                     //Console.Clear();
                     pcscore = 0;
                     playerscore = 0;
-                    keepPlaying = playerinput("Tryck J för att börja om!");
+                    if (playerinput("Tryck J för att börja om! Tryck N för att avsluta.") == false)
+                        break;
+                }
 
+                if (cardsleft < 17)
+                {
+                    //Console.Clear();
+                    resetCardArray();
+                    cardsleft = (types * 13) - 1;
+                    pcscore = 0;
+                    playerscore = 0;
+                    Console.WriteLine("Korten har lämnats tillbaka in och blandats om! Tryck Enter för att fortsätta.");
+                    Console.ReadLine();
+                    Console.Clear();
                 }
             }
 
@@ -121,13 +142,16 @@ namespace BlackJack_vs_PC
         static int giveCard(bool user, bool cheat)
         {
             int attempts = 0;
+
+            //normal situation
             int lowestdesired = 0;
             int highestdesired = 13;
-            if (cheat)
+
+            if (cheat) //PC can chose a better card
             {
                 highestdesired = 21 - pcscore;
-                if (highestdesired > 10)
-                    highestdesired = 10;               
+                if (highestdesired > 13)
+                    highestdesired = 13;               
 
                 if (playerscore > 10)
                     lowestdesired = 9;
@@ -143,13 +167,16 @@ namespace BlackJack_vs_PC
             int randomnumber = 0;
             while (true)
             {
-                randomtype = randomgenerator.Next(0, 16);
+                randomtype = randomgenerator.Next(0, types);
                 randomnumber = randomgenerator.Next(0, highestdesired);
 
                 if (cardBools[randomtype, randomnumber] == false) //if finds an unused card
                 {
+                    cardsleft--;
                     break;
                 }
+                //else
+                    //Console.WriteLine("Dålig slump, slumpar på nytt.");
 
                 attempts++;
 
@@ -158,8 +185,8 @@ namespace BlackJack_vs_PC
                     attempts = 0;
                     highestdesired++;
                     lowestdesired--;
-                    if (highestdesired > 13)
-                        highestdesired = 13;
+                    if (highestdesired > 10)
+                        highestdesired = 10;
                     if (lowestdesired < 0)
                         lowestdesired = 0;
                 }
@@ -202,7 +229,7 @@ namespace BlackJack_vs_PC
 
         static void resetCardArray()
         {
-            for (int t = 0; t < 16; t++) //count types
+            for (int t = 0; t < types; t++) //count types
             {
                 for (int n = 0; n < 13; n++) //count cards inside a type
                 {
