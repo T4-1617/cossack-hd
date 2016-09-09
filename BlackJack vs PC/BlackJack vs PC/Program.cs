@@ -23,7 +23,6 @@ namespace BlackJack_vs_PC
         static void Main(string[] args)
         {
 
-
             resetCardArray();
 
             while (keepPlaying)
@@ -35,7 +34,7 @@ namespace BlackJack_vs_PC
                 //
                 while (pcscore < 21 && playerscore < 21 && keepPlaying)
                 {
-                    
+
                     //PC's turn
                     if (pcsturn)
                     {
@@ -69,7 +68,7 @@ namespace BlackJack_vs_PC
                         Console.Clear();
                         pcscore += giveCard(false, true);
                         pcsturn = false;
-                        
+
                         if (pcscore > 20)
                             keepPlaying = false;
                         Console.WriteLine();
@@ -118,6 +117,8 @@ namespace BlackJack_vs_PC
                     playerscore = 0;
                     if (playerinput("Tryck J för att börja om! Tryck N för att avsluta.") == false)
                         break;
+                    else
+                        keepPlaying = true;
                 }
 
                 if (cardsleft < 17)
@@ -151,8 +152,9 @@ namespace BlackJack_vs_PC
             {
                 highestdesired = 21 - pcscore;
                 if (highestdesired > 13)
-                    highestdesired = 13;               
+                    highestdesired = 13;
 
+                lowestdesired = playerscore;
                 if (playerscore > 10)
                     lowestdesired = 9;
             }
@@ -176,7 +178,7 @@ namespace BlackJack_vs_PC
                     break;
                 }
                 //else
-                    //Console.WriteLine("Dålig slump, slumpar på nytt.");
+                //Console.WriteLine("Dålig slump, slumpar på nytt.");
 
                 attempts++;
 
@@ -190,7 +192,7 @@ namespace BlackJack_vs_PC
                     if (lowestdesired < 0)
                         lowestdesired = 0;
                 }
-                
+
             }
             cardBools[randomtype, randomnumber] = true; //sets the card as used
             printcardname(user, randomtype, randomnumber); //calls print card name method for the given card
