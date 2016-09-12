@@ -26,6 +26,25 @@ namespace CRM_V1
             Customer c = new Customer();
 
             int random = 0;
+            bool verifiedRandom = false;
+
+
+            while (verifiedRandom == false)
+            {
+                random = generaterandom();
+
+                verifiedRandom = true;
+
+                foreach (Customer d in myCustomers)
+                {
+                    if (random == d.id)
+                    {
+                        MessageBox.Show("Generated new random");
+                        verifiedRandom = false;
+                    }
+                }
+
+            }
 
 
             c.fName = txbFname.Text;
@@ -43,7 +62,7 @@ namespace CRM_V1
             {
                 lboxCustomers.Items.Add(d.fullName());
             }
-            
+
 
         }
 
@@ -56,7 +75,10 @@ namespace CRM_V1
 
         private void lboxCustomers_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            int index = lboxCustomers.SelectedIndex;
+            Customer x = new Customer();
+            x = (Customer)myCustomers[index];
+            MessageBox.Show(String.Format("{0}, {1}, {2}", x.fullName(), x.id, x.isActive));
         }
     }
 }
