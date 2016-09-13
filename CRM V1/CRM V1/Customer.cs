@@ -11,7 +11,7 @@ namespace CRM_V1
         public int id { get; set; }
         public string fName { get; set; }
         public string lName { get; set; }
-        public bool isActive { get; set; }
+        public bool isVIP { get; set; }
 
 
         public string fullName()

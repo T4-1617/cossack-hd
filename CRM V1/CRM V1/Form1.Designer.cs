@@ -35,6 +35,7 @@
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.lblCounter = new System.Windows.Forms.Label();
             this.lboxCustomers = new System.Windows.Forms.ListBox();
+            this.cboxVIP = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblFName
@@ -97,11 +98,23 @@
             this.lboxCustomers.TabIndex = 6;
             this.lboxCustomers.SelectedIndexChanged += new System.EventHandler(this.lboxCustomers_SelectedIndexChanged);
             // 
+            // cboxVIP
+            // 
+            this.cboxVIP.AutoSize = true;
+            this.cboxVIP.Location = new System.Drawing.Point(193, 152);
+            this.cboxVIP.Name = "cboxVIP";
+            this.cboxVIP.Size = new System.Drawing.Size(43, 17);
+            this.cboxVIP.TabIndex = 7;
+            this.cboxVIP.Text = "VIP";
+            this.cboxVIP.UseVisualStyleBackColor = true;
+            this.cboxVIP.CheckedChanged += new System.EventHandler(this.cboxVIP_CheckedChanged);
+            // 
             // CRM_MainWind
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(276, 324);
+            this.Controls.Add(this.cboxVIP);
             this.Controls.Add(this.lboxCustomers);
             this.Controls.Add(this.lblCounter);
             this.Controls.Add(this.btnAddCustomer);
@@ -125,6 +138,7 @@
         private System.Windows.Forms.Button btnAddCustomer;
         private System.Windows.Forms.Label lblCounter;
         private System.Windows.Forms.ListBox lboxCustomers;
+        private System.Windows.Forms.CheckBox cboxVIP;
     }
 }
 

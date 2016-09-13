@@ -50,7 +50,7 @@ namespace CRM_V1
             c.fName = txbFname.Text;
             c.lName = txbLname.Text;
             c.id = random;
-            c.isActive = true;
+            c.isVIP = true;
 
             myCustomers.Add(c);
 
@@ -78,7 +78,19 @@ namespace CRM_V1
             int index = lboxCustomers.SelectedIndex;
             Customer x = new Customer();
             x = (Customer)myCustomers[index];
-            MessageBox.Show(String.Format("{0}, {1}, {2}", x.fullName(), x.id, x.isActive));
+            MessageBox.Show(String.Format("{0}, {1}", x.fullName(), x.id));
+
+            cboxVIP.Checked = x.isVIP;
+
+        }
+
+
+
+        private void cboxVIP_CheckedChanged(object sender, EventArgs e)
+        {
+            Customer C = (Customer)myCustomers[lboxCustomers.SelectedIndex];
+            C.isVIP = cboxVIP.Checked;
+
         }
     }
 }
