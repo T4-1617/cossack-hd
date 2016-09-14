@@ -24,7 +24,17 @@ namespace BilUthyrning
         }
 
 
-        public void batchProperties(int newID, string newREGNUMB, bool newAVAILABLE, string newMODEL, string newCOLOR, int newMILEAGE)
+        public Car(int newID, string newREGNUMB, bool newAVAILABLE, string newMODEL, string newCOLOR, int newMILEAGE)
+        {
+            id = newID;
+            regnumb = newREGNUMB;
+            available = newAVAILABLE;
+            model = newMODEL;
+            color = newCOLOR;
+            mileage = newMILEAGE;
+        }
+
+        public void updateCar(int newID, string newREGNUMB, bool newAVAILABLE, string newMODEL, string newCOLOR, int newMILEAGE)
         {
             id = newID;
             regnumb = newREGNUMB;
