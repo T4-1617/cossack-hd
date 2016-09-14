@@ -34,11 +34,8 @@ namespace BilUthyrning
             mileage = newMILEAGE;
         }
 
-        public void updateCar(int newID, string newREGNUMB, string newMODEL, string newCOLOR, bool newAVAILABLE, string newCurrentUser, int newMILEAGE)
+        public void updateCar(string newCOLOR, bool newAVAILABLE, string newCurrentUser, int newMILEAGE)
         {
-            id = newID;
-            regnumb = newREGNUMB;          
-            model = newMODEL;
             color = newCOLOR;
             available = newAVAILABLE;
             currentUser = newCurrentUser;
@@ -90,6 +87,10 @@ namespace BilUthyrning
 
                 default:
                     return "Invalid propname argument!!11";
+
+
+                case "puremileagevalue":
+                    return (mileage.ToString());
 
 
             }
