@@ -57,6 +57,7 @@
             this.lbxCars.Name = "lbxCars";
             this.lbxCars.Size = new System.Drawing.Size(264, 316);
             this.lbxCars.TabIndex = 1;
+            this.lbxCars.SelectedIndexChanged += new System.EventHandler(this.lbxCars_SelectedIndexChanged);
             // 
             // lblCars
             // 
@@ -84,6 +85,7 @@
             this.btnEdit.TabIndex = 0;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnSave
             // 
@@ -102,6 +104,7 @@
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lbxProps
             // 
