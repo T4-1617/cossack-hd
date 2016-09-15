@@ -13,7 +13,8 @@ namespace BilUthyrning
     public partial class Form1 : Form
     {
 
-        System.Collections.ArrayList myCars = new System.Collections.ArrayList();
+        List<Car> cars = new List<Car>();
+        //System.Collections.ArrayList cars = new System.Collections.ArrayList();
         public bool editmode = false;
 
 
@@ -24,16 +25,10 @@ namespace BilUthyrning
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             defaultFormControls();
-
             populateDemo();
-
-            foreach (Car item in myCars)
-            {
+            foreach (Car item in cars)
                 lbxCars.Items.Add(item);
-            }
-
         }
 
 
@@ -41,14 +36,12 @@ namespace BilUthyrning
         {
 
             pnlProps.Visible = true;
-            int index = lbxCars.SelectedIndex;
-            showproperties(index);
+            showproperties((Car)lbxCars.SelectedItem);
         }
 
 
-        private void showproperties(int ind)
+        private void showproperties(Car c)
         {
-            Car c = (Car)myCars[ind];
             tbxPrp1.Text = c.returnSelectedProp("id");
             tbxPrp2.Text = c.returnSelectedProp("regnr");
             tbxPrp3.Text = c.returnSelectedProp("model");
@@ -64,7 +57,7 @@ namespace BilUthyrning
         {
             btnEdit.Enabled = false;
             lbxCars.Enabled = false;
-            Car c = (Car)myCars[lbxCars.SelectedIndex];
+            Car c = (Car)cars[lbxCars.SelectedIndex];
             editmode = true;
             btnSave.Enabled = true;
             tbxPrp4.ReadOnly = false;
@@ -81,13 +74,17 @@ namespace BilUthyrning
         {
             defaultFormControls();
             lbxCars.Enabled = true;
-            Car c = (Car)myCars[lbxCars.SelectedIndex];
+            Car c = (Car)cars[lbxCars.SelectedIndex];
 
             if (cbxAvailable.Checked)
                 tbxPrp6.Text = "";
 
             c.updateCar(tbxPrp4.Text, cbxAvailable.Checked, tbxPrp6.Text, tbxPrp7.Text);
             editmode = false;
+            lbxCars.Items.Clear();
+            foreach (Car item in cars)
+                lbxCars.Items.Add(item);
+            lbxCars.SelectedIndex = 0;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -100,11 +97,11 @@ namespace BilUthyrning
         private void populateDemo()
         {
             //Car demonew Car(ID, "REGNR",   "MODELNAME", "COLOR", AVAIL, "CURRUSER",     "MILEAGE");
-            myCars.Add(new Car(0, "MLG420", "Volvo V70", "Black", false, "Köra Bil 100%", "19226"));
-            myCars.Add(new Car(1, "POTATIS", "Wolksvagen Fox", "Light Brown", false, "Medveten Varelse", "8787"));
-            myCars.Add(new Car(2, "NCP360", "Porsche 911", "Orange", true, "", "21"));
-            myCars.Add(new Car(3, "NOP101", "Volvo XC90", "Green", true, "", "57384"));
-            myCars.Add(new Car(4, "UWM800", "Volvo XC90", "White", false, "Annan Människa", "573843544"));
+            cars.Add(new Car(0, "MLG420", "Volvo V70", "Black", false, "Köra Bil 100%", "19226"));
+            cars.Add(new Car(1, "POTATIS", "Wolksvagen Fox", "Light Brown", false, "Medveten Varelse", "8787"));
+            cars.Add(new Car(2, "NCP360", "Porsche 911", "Orange", true, "", "21"));
+            cars.Add(new Car(3, "NOP101", "Volvo XC90", "Green", true, "", "57384"));
+            cars.Add(new Car(4, "UWM800", "Volvo XC90", "White", false, "Annan Människa", "573843544"));
         }
 
         private void defaultFormControls()
