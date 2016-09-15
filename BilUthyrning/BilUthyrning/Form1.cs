@@ -17,7 +17,6 @@ namespace BilUthyrning
         public bool editmode = false;
 
 
-
         public Form1()
         {
             InitializeComponent();
@@ -44,16 +43,12 @@ namespace BilUthyrning
             pnlProps.Visible = true;
             int index = lbxCars.SelectedIndex;
             showproperties(index);
-
         }
 
 
         private void showproperties(int ind)
         {
-
             Car c = (Car)myCars[ind];
-
-
             tbxPrp1.Text = c.returnSelectedProp("id");
             tbxPrp2.Text = c.returnSelectedProp("regnr");
             tbxPrp3.Text = c.returnSelectedProp("model");
@@ -61,11 +56,7 @@ namespace BilUthyrning
             tbxPrp5.Text = c.returnSelectedProp("available");
             tbxPrp6.Text = c.returnSelectedProp("currentUser");
             tbxPrp7.Text = c.returnSelectedProp("mileage");
-
-
         }
-
-
 
 
 
@@ -81,8 +72,7 @@ namespace BilUthyrning
             cbxAvailable.Visible = true;
             tbxPrp6.ReadOnly = false;
             tbxPrp7.ReadOnly = false;
-            tbxPrp7.Text = c.returnSelectedProp("puremileagevalue");
-            
+            tbxPrp7.Text = c.returnSelectedProp("mileage");           
         }
 
 
@@ -93,40 +83,34 @@ namespace BilUthyrning
             lbxCars.Enabled = true;
             Car c = (Car)myCars[lbxCars.SelectedIndex];
 
-            c.updateCar(tbxPrp4.Text, cbxAvailable.Checked, tbxPrp6.Text, int.Parse(tbxPrp7.Text));
-            editmode = false;
+            if (cbxAvailable.Checked)
+                tbxPrp6.Text = "";
 
+            c.updateCar(tbxPrp4.Text, cbxAvailable.Checked, tbxPrp6.Text, tbxPrp7.Text);
+            editmode = false;
         }
 
-
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            defaultFormControls();
+        }
 
         //UTILS
 
         private void populateDemo()
         {
-
-            //Car demo = new Car(ID, "REGNR", AVAIL, "MODELNAME", "COLOR", MILEAGE);
-            Car c0 = new Car(0, "MLG420", "Volvo V70", "Black", false, "Köra Bil 100%", 19226);
-
-            Car c1 = new Car(1, "POTATIS", "Wolksvagen Fox", "Light Brown", false, "Medveten Varelse", 19226);
-
-            Car c2 = new Car(2, "NCP360", "Porsche 911", "Orange", true, "Generic Name", 21);
-
-            Car c3 = new Car(3, "NOP101", "Volvo XC90", "Green", true, "Någon Person", 57384);
-
-            Car c4 = new Car(4, "UWM800", "Volvo XC90", "White", false, "Annan Människa", 573843544);
-
-            myCars.Add(c0);
-            myCars.Add(c1);
-            myCars.Add(c2);
-            myCars.Add(c3);
-            myCars.Add(c4);
-
+            //Car demonew Car(ID, "REGNR",   "MODELNAME", "COLOR", AVAIL, "CURRUSER",     "MILEAGE");
+            myCars.Add(new Car(0, "MLG420", "Volvo V70", "Black", false, "Köra Bil 100%", "19226"));
+            myCars.Add(new Car(1, "POTATIS", "Wolksvagen Fox", "Light Brown", false, "Medveten Varelse", "8787"));
+            myCars.Add(new Car(2, "NCP360", "Porsche 911", "Orange", true, "", "21"));
+            myCars.Add(new Car(3, "NOP101", "Volvo XC90", "Green", true, "", "57384"));
+            myCars.Add(new Car(4, "UWM800", "Volvo XC90", "White", false, "Annan Människa", "573843544"));
         }
 
         private void defaultFormControls()
         {
             pnlProps.Visible = false;
+            lbxCars.Enabled = true;
             btnSave.Enabled = false;
             cbxAvailable.Visible = false;
             btnEdit.Enabled = true;
@@ -139,16 +123,10 @@ namespace BilUthyrning
             tbxPrp5.Visible = true;
             tbxPrp6.ReadOnly = true;
             tbxPrp7.ReadOnly = true;
-
         }
 
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            defaultFormControls();
-            pnlProps.Visible = false;
-            lbxCars.Enabled = true;
-        }
+        //control utils
 
         private void tbxPrp4_Click(object sender, EventArgs e)
         {
@@ -165,6 +143,8 @@ namespace BilUthyrning
 
         private void tbxPrp7_Click(object sender, EventArgs e)
         {
+            if (editmode)
+                tbxPrp7.Text = "";
         }
     }
 }

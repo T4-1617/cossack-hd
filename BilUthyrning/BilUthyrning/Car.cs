@@ -14,7 +14,7 @@ namespace BilUthyrning
         public string model { get; set; } //essential for proper displaying
         public string color { get; set; } //important in many cases
         public string currentUser { get; set; } //a nice to have if you want your car back
-        public int mileage { get; set; } //important for service
+        public string mileage { get; set; } //important for service
 
 
         public override string ToString()
@@ -23,7 +23,7 @@ namespace BilUthyrning
         }
 
 
-        public Car(int newID, string newREGNUMB, string newMODEL, string newCOLOR, bool newAVAILABLE, string newCurrentUser, int newMILEAGE)
+        public Car(int newID, string newREGNUMB, string newMODEL, string newCOLOR, bool newAVAILABLE, string newCurrentUser, string newMILEAGE)
         {
             id = newID;
             regnumb = newREGNUMB;
@@ -34,7 +34,7 @@ namespace BilUthyrning
             mileage = newMILEAGE;
         }
 
-        public void updateCar(string newCOLOR, bool newAVAILABLE, string newCurrentUser, int newMILEAGE)
+        public void updateCar(string newCOLOR, bool newAVAILABLE, string newCurrentUser, string newMILEAGE)
         {
             color = newCOLOR;
             available = newAVAILABLE;
@@ -45,18 +45,7 @@ namespace BilUthyrning
 
         public string returnSelectedProp(string propname)
         {
-            //list of available propnames below!
-
-            //lbxProps.Items.Add(c.returnSelectedProp("id"));
-            //lbxProps.Items.Add(c.returnSelectedProp("regnr"));
-            //lbxProps.Items.Add(c.returnSelectedProp("model"));
-            //lbxProps.Items.Add(c.returnSelectedProp("color"));
-            //lbxProps.Items.Add(c.returnSelectedProp("available"));
-            //lbxProps.Items.Add(c.returnSelectedProp("currentUser"));
-            //lbxProps.Items.Add(c.returnSelectedProp("mileage"));
-
-
-            switch (propname)
+           switch (propname)
             {
                 case "id":
                     return string.Format("ID: {0}", id.ToString());
@@ -87,10 +76,6 @@ namespace BilUthyrning
 
                 default:
                     return "Invalid propname argument!!11";
-
-
-                case "puremileagevalue":
-                    return (mileage.ToString());
 
 
             }
