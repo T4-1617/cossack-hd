@@ -30,6 +30,7 @@ namespace CarManagement
             cars = new System.Collections.ArrayList();
             populateDemo();
             restoreGUI();
+            lblMsg.Visible = false;
             
         }
 
@@ -47,10 +48,11 @@ namespace CarManagement
             label2.Visible = false;
             label3.Visible = false;
             label4.Visible = false;
+            btnAction.Enabled = false;
+
 
             listBox1.Items.Clear();
             listBox1.Visible = false;
-            lblMsg.Visible = false;
             panel1.Visible = false;
             tbxVisible(false);
 
@@ -76,16 +78,7 @@ namespace CarManagement
             cars.Add(new Car("PWR999", "TESTA", "MODEL X", "White", true));
         }
 
-        private void btnViewAvailable_Click(object sender, EventArgs e)
-        {
-            btnAction.Enabled = true;
-            btnAction.Location = (new Point(200, 111));
-            viewcars = true;
-            addcars = false;
-            showmessage = false;
-            showListOfCars(true);
 
-        }
 
         private void showListOfCars(bool avail)
         {
@@ -100,21 +93,36 @@ namespace CarManagement
                 { 
                     listBox1.Items.Add(x);
                 }
+
             }
-
-
             listBox1.Visible = true;
-
             btnAction.Text = "Book the car";
         }
 
+
+
+        private void btnViewAvailable_Click(object sender, EventArgs e)
+        {
+            lblMsg.Visible = false;
+            btnAction.Enabled = true;
+            btnAction.Location = (new Point(200, 111));
+            viewcars = true;
+            addcars = false;
+            showmessage = false;
+            showListOfCars(true);
+            returnCar = false;
+        }
+
+
         private void btnAddCars_Click(object sender, EventArgs e)
         {
+            lblMsg.Visible = false;
             addcars = true;
             viewcars = false;
             returnCar = false;
             restoreGUI();
             listBox1.Items.Clear();
+            listBox1.SelectedIndex = -1;
             panel1.Visible = true;
             listBox1.Visible = false;
             tbxVisible(true);
@@ -128,51 +136,11 @@ namespace CarManagement
             label4.Visible = true;
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            selectedCar = (Car)listBox1.SelectedItem;
-            carSelected = true;
-            btnAction.Enabled = true;
-        }
 
-        private void btnAction_Click(object sender, EventArgs e)
-        {
-            if (viewcars && carSelected)
-            {
-                selectedCar.available = false;
-                lblMsg.Visible = true;
-                lblMsg.Text = "Thank you for your booking!";
-            }
-
-
-            if (addcars)
-            {
-                cars.Add(new Car(tbxRN.Text, tbxMake.Text, tbxModel.Text, tbxColor.Text, true));
-                
-                lblMsg.Text = "Car has been added!";
-
-                tbxRN.Text = string.Empty;
-                tbxMake.Text = string.Empty;
-                tbxModel.Text = string.Empty;
-                tbxColor.Text = string.Empty;
-            }
-
-
-            if (returnCar)
-            {
-                selectedCar.available = true;
-                lblMsg.Text = "Thank you for your business!";
-
-            }
-
-
-            restoreGUI();
-            //panel1.Visible = true;
-            lblMsg.Visible = true;
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            lblMsg.Visible = false;
             restoreGUI();
             showListOfCars(false);
             btnAction.Location = (new Point(200, 111));
@@ -184,5 +152,56 @@ namespace CarManagement
             returnCar = true;
             btnAction.Text = "Return car";
         }
+
+
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedCar = (Car)listBox1.SelectedItem;
+            carSelected = true;
+            btnAction.Enabled = true;
+
+        }
+
+        private void btnAction_Click(object sender, EventArgs e)
+        {
+
+            
+
+            if (viewcars && carSelected)
+            {
+                selectedCar.carRent(true);
+                lblMsg.Visible = true;
+                lblMsg.Text = "Thank you for your booking!";
+            }
+            else if (addcars)
+            {
+                cars.Add(new Car(tbxRN.Text, tbxMake.Text, tbxModel.Text, tbxColor.Text, true));
+                
+                lblMsg.Text = "Car has been added!";
+                lblMsg.Visible = true;
+                tbxRN.Text = string.Empty;
+                tbxMake.Text = string.Empty;
+                tbxModel.Text = string.Empty;
+                tbxColor.Text = string.Empty;
+            }
+
+
+            else if (returnCar && carSelected)
+            {
+                selectedCar.carRent(false);
+                lblMsg.Text = "Thank you for your business!";
+                lblMsg.Visible = true;
+
+            }
+
+            carSelected = false;
+
+            restoreGUI();
+            //panel1.Visible = true;
+            
+        }
+
+
     }
 }
