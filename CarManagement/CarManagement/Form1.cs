@@ -127,7 +127,7 @@ namespace CarManagement
             listBox1.Visible = false;
             tbxVisible(true);
             btnAction.Text = "Add a car";
-
+            btnAction.Enabled = true;
             btnAction.Location = (new Point(73, 111));
 
             label1.Visible = true;
