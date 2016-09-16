@@ -20,6 +20,7 @@ namespace CarManagement
         public bool addcars = false;
         public bool showmessage = false;
         public bool carSelected = false;
+        public bool returnCar = false;
         public int availableCars;
 
 
@@ -78,6 +79,7 @@ namespace CarManagement
         private void btnViewAvailable_Click(object sender, EventArgs e)
         {
             btnAction.Enabled = true;
+            btnAction.Location = (new Point(200, 111));
             viewcars = true;
             addcars = false;
             showmessage = false;
@@ -85,7 +87,7 @@ namespace CarManagement
 
         }
 
-        private void showListOfCars(bool available)
+        private void showListOfCars(bool avail)
         {
             restoreGUI();
             panel1.Visible = true;
@@ -94,7 +96,7 @@ namespace CarManagement
             listBox1.Items.Clear();
             foreach (Car x in cars)
             {
-                if (x.available)
+                if (x.available == avail)
                 { 
                     listBox1.Items.Add(x);
                 }
@@ -109,12 +111,16 @@ namespace CarManagement
         private void btnAddCars_Click(object sender, EventArgs e)
         {
             addcars = true;
+            viewcars = false;
+            returnCar = false;
             restoreGUI();
             listBox1.Items.Clear();
             panel1.Visible = true;
             listBox1.Visible = false;
             tbxVisible(true);
             btnAction.Text = "Add a car";
+
+            btnAction.Location = (new Point(73, 111));
 
             label1.Visible = true;
             label2.Visible = true;
@@ -151,9 +157,32 @@ namespace CarManagement
                 tbxColor.Text = string.Empty;
             }
 
+
+            if (returnCar)
+            {
+                selectedCar.available = true;
+                lblMsg.Text = "Thank you for your business!";
+
+            }
+
+
             restoreGUI();
             //panel1.Visible = true;
             lblMsg.Visible = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            restoreGUI();
+            showListOfCars(false);
+            btnAction.Location = (new Point(200, 111));
+            addcars = false;
+            viewcars = false;
+            panel1.Visible = true;
+            listBox1.Visible = true;
+            btnAction.Visible = true;
+            returnCar = true;
+            btnAction.Text = "Return car";
         }
     }
 }
