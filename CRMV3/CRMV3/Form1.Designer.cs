@@ -43,8 +43,6 @@
             this.txbIDs = new System.Windows.Forms.TextBox();
             this.txbCompany = new System.Windows.Forms.TextBox();
             this.txbSalary = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
             this.txbTitle = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblFName = new System.Windows.Forms.Label();
@@ -53,23 +51,15 @@
             this.lblIDs = new System.Windows.Forms.Label();
             this.lblCompany = new System.Windows.Forms.Label();
             this.lblSalary = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.lblNewSalary = new System.Windows.Forms.Label();
             this.lblNewCompany = new System.Windows.Forms.Label();
-            this.lblNewID = new System.Windows.Forms.Label();
             this.lblNewPhone = new System.Windows.Forms.Label();
             this.lblNewLName = new System.Windows.Forms.Label();
             this.lblNewFName = new System.Windows.Forms.Label();
             this.lblTitleNew = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.tbxNewSlary = new System.Windows.Forms.TextBox();
+            this.tbxNewTitle = new System.Windows.Forms.TextBox();
+            this.tbxNewSalary = new System.Windows.Forms.TextBox();
             this.tbxNewCompany = new System.Windows.Forms.TextBox();
-            this.tbxNewID = new System.Windows.Forms.TextBox();
             this.tbxNewPhone = new System.Windows.Forms.TextBox();
             this.tbxNewLName = new System.Windows.Forms.TextBox();
             this.tbxNewFName = new System.Windows.Forms.TextBox();
@@ -80,12 +70,13 @@
             // 
             // btnSaveNew
             // 
-            this.btnSaveNew.Location = new System.Drawing.Point(274, 183);
+            this.btnSaveNew.Location = new System.Drawing.Point(103, 146);
             this.btnSaveNew.Name = "btnSaveNew";
             this.btnSaveNew.Size = new System.Drawing.Size(75, 23);
             this.btnSaveNew.TabIndex = 0;
             this.btnSaveNew.Text = "Spara";
             this.btnSaveNew.UseVisualStyleBackColor = true;
+            this.btnSaveNew.Click += new System.EventHandler(this.btnSaveNew_Click);
             // 
             // cmbxNewType
             // 
@@ -94,33 +85,28 @@
             this.cmbxNewType.Name = "cmbxNewType";
             this.cmbxNewType.Size = new System.Drawing.Size(121, 21);
             this.cmbxNewType.TabIndex = 1;
+            this.cmbxNewType.SelectedIndexChanged += new System.EventHandler(this.cmbxNewType_SelectedIndexChanged);
             // 
             // lbxView
             // 
             this.lbxView.FormattingEnabled = true;
             this.lbxView.Location = new System.Drawing.Point(6, 28);
             this.lbxView.Name = "lbxView";
-            this.lbxView.Size = new System.Drawing.Size(164, 147);
+            this.lbxView.Size = new System.Drawing.Size(191, 147);
             this.lbxView.TabIndex = 2;
             // 
             // grpBxAdd
             // 
             this.grpBxAdd.Controls.Add(this.lblChoseType);
-            this.grpBxAdd.Controls.Add(this.label1);
-            this.grpBxAdd.Controls.Add(this.label2);
             this.grpBxAdd.Controls.Add(this.lblNewSalary);
             this.grpBxAdd.Controls.Add(this.lblNewCompany);
-            this.grpBxAdd.Controls.Add(this.lblNewID);
             this.grpBxAdd.Controls.Add(this.lblNewPhone);
             this.grpBxAdd.Controls.Add(this.lblNewLName);
             this.grpBxAdd.Controls.Add(this.lblNewFName);
             this.grpBxAdd.Controls.Add(this.lblTitleNew);
-            this.grpBxAdd.Controls.Add(this.textBox1);
-            this.grpBxAdd.Controls.Add(this.textBox2);
-            this.grpBxAdd.Controls.Add(this.textBox3);
-            this.grpBxAdd.Controls.Add(this.tbxNewSlary);
+            this.grpBxAdd.Controls.Add(this.tbxNewTitle);
+            this.grpBxAdd.Controls.Add(this.tbxNewSalary);
             this.grpBxAdd.Controls.Add(this.tbxNewCompany);
-            this.grpBxAdd.Controls.Add(this.tbxNewID);
             this.grpBxAdd.Controls.Add(this.tbxNewPhone);
             this.grpBxAdd.Controls.Add(this.tbxNewLName);
             this.grpBxAdd.Controls.Add(this.tbxNewFName);
@@ -129,14 +115,14 @@
             this.grpBxAdd.Controls.Add(this.cmbxNewType);
             this.grpBxAdd.Location = new System.Drawing.Point(12, 12);
             this.grpBxAdd.Name = "grpBxAdd";
-            this.grpBxAdd.Size = new System.Drawing.Size(634, 212);
+            this.grpBxAdd.Size = new System.Drawing.Size(451, 183);
             this.grpBxAdd.TabIndex = 3;
             this.grpBxAdd.TabStop = false;
             this.grpBxAdd.Text = "Registrera nya kontakter:";
             // 
             // btnCancelNew
             // 
-            this.btnCancelNew.Location = new System.Drawing.Point(355, 183);
+            this.btnCancelNew.Location = new System.Drawing.Point(184, 146);
             this.btnCancelNew.Name = "btnCancelNew";
             this.btnCancelNew.Size = new System.Drawing.Size(75, 23);
             this.btnCancelNew.TabIndex = 2;
@@ -153,8 +139,6 @@
             // 
             // grpBxViewEdit
             // 
-            this.grpBxViewEdit.Controls.Add(this.label8);
-            this.grpBxViewEdit.Controls.Add(this.label7);
             this.grpBxViewEdit.Controls.Add(this.lblSalary);
             this.grpBxViewEdit.Controls.Add(this.lblCompany);
             this.grpBxViewEdit.Controls.Add(this.lblIDs);
@@ -163,8 +147,6 @@
             this.grpBxViewEdit.Controls.Add(this.lblFName);
             this.grpBxViewEdit.Controls.Add(this.lblTitle);
             this.grpBxViewEdit.Controls.Add(this.txbTitle);
-            this.grpBxViewEdit.Controls.Add(this.textBox8);
-            this.grpBxViewEdit.Controls.Add(this.textBox7);
             this.grpBxViewEdit.Controls.Add(this.txbSalary);
             this.grpBxViewEdit.Controls.Add(this.txbCompany);
             this.grpBxViewEdit.Controls.Add(this.txbIDs);
@@ -174,7 +156,7 @@
             this.grpBxViewEdit.Controls.Add(this.btnCancelEdit);
             this.grpBxViewEdit.Controls.Add(this.btnSaveEdit);
             this.grpBxViewEdit.Controls.Add(this.lbxView);
-            this.grpBxViewEdit.Location = new System.Drawing.Point(12, 290);
+            this.grpBxViewEdit.Location = new System.Drawing.Point(12, 213);
             this.grpBxViewEdit.Name = "grpBxViewEdit";
             this.grpBxViewEdit.Size = new System.Drawing.Size(628, 192);
             this.grpBxViewEdit.TabIndex = 5;
@@ -225,7 +207,7 @@
             // 
             // txbIDs
             // 
-            this.txbIDs.Location = new System.Drawing.Point(351, 106);
+            this.txbIDs.Location = new System.Drawing.Point(522, 80);
             this.txbIDs.Name = "txbIDs";
             this.txbIDs.ReadOnly = true;
             this.txbIDs.Size = new System.Drawing.Size(100, 20);
@@ -246,22 +228,6 @@
             this.txbSalary.ReadOnly = true;
             this.txbSalary.Size = new System.Drawing.Size(100, 20);
             this.txbSalary.TabIndex = 5;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(522, 80);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 5;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(522, 106);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 5;
             // 
             // txbTitle
             // 
@@ -310,7 +276,7 @@
             // lblIDs
             // 
             this.lblIDs.AutoSize = true;
-            this.lblIDs.Location = new System.Drawing.Point(291, 109);
+            this.lblIDs.Location = new System.Drawing.Point(463, 83);
             this.lblIDs.Name = "lblIDs";
             this.lblIDs.Size = new System.Drawing.Size(57, 13);
             this.lblIDs.TabIndex = 7;
@@ -334,42 +300,6 @@
             this.lblSalary.TabIndex = 7;
             this.lblSalary.Text = "Lön:";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(481, 83);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "label1";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(481, 109);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "label1";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(289, 143);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(289, 117);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "label1";
-            // 
             // lblNewSalary
             // 
             this.lblNewSalary.AutoSize = true;
@@ -387,15 +317,6 @@
             this.lblNewCompany.Size = new System.Drawing.Size(46, 13);
             this.lblNewCompany.TabIndex = 21;
             this.lblNewCompany.Text = "Företag:";
-            // 
-            // lblNewID
-            // 
-            this.lblNewID.AutoSize = true;
-            this.lblNewID.Location = new System.Drawing.Point(99, 143);
-            this.lblNewID.Name = "lblNewID";
-            this.lblNewID.Size = new System.Drawing.Size(57, 13);
-            this.lblNewID.TabIndex = 20;
-            this.lblNewID.Text = "PLCHLDR";
             // 
             // lblNewPhone
             // 
@@ -433,37 +354,21 @@
             this.lblTitleNew.TabIndex = 17;
             this.lblTitleNew.Text = "Titel:";
             // 
-            // textBox1
+            // tbxNewTitle
             // 
-            this.textBox1.Location = new System.Drawing.Point(45, 62);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(52, 20);
-            this.textBox1.TabIndex = 16;
+            this.tbxNewTitle.Location = new System.Drawing.Point(45, 62);
+            this.tbxNewTitle.Name = "tbxNewTitle";
+            this.tbxNewTitle.ReadOnly = true;
+            this.tbxNewTitle.Size = new System.Drawing.Size(52, 20);
+            this.tbxNewTitle.TabIndex = 16;
             // 
-            // textBox2
+            // tbxNewSalary
             // 
-            this.textBox2.Location = new System.Drawing.Point(330, 140);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 14;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(330, 114);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 13;
-            // 
-            // tbxNewSlary
-            // 
-            this.tbxNewSlary.Location = new System.Drawing.Point(330, 88);
-            this.tbxNewSlary.Name = "tbxNewSlary";
-            this.tbxNewSlary.ReadOnly = true;
-            this.tbxNewSlary.Size = new System.Drawing.Size(100, 20);
-            this.tbxNewSlary.TabIndex = 12;
+            this.tbxNewSalary.Location = new System.Drawing.Point(330, 88);
+            this.tbxNewSalary.Name = "tbxNewSalary";
+            this.tbxNewSalary.ReadOnly = true;
+            this.tbxNewSalary.Size = new System.Drawing.Size(100, 20);
+            this.tbxNewSalary.TabIndex = 12;
             // 
             // tbxNewCompany
             // 
@@ -472,14 +377,6 @@
             this.tbxNewCompany.ReadOnly = true;
             this.tbxNewCompany.Size = new System.Drawing.Size(100, 20);
             this.tbxNewCompany.TabIndex = 11;
-            // 
-            // tbxNewID
-            // 
-            this.tbxNewID.Location = new System.Drawing.Point(159, 140);
-            this.tbxNewID.Name = "tbxNewID";
-            this.tbxNewID.ReadOnly = true;
-            this.tbxNewID.Size = new System.Drawing.Size(100, 20);
-            this.tbxNewID.TabIndex = 10;
             // 
             // tbxNewPhone
             // 
@@ -518,7 +415,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(658, 497);
+            this.ClientSize = new System.Drawing.Size(658, 418);
             this.Controls.Add(this.lblStats);
             this.Controls.Add(this.grpBxAdd);
             this.Controls.Add(this.grpBxViewEdit);
@@ -540,29 +437,21 @@
         private System.Windows.Forms.ListBox lbxView;
         private System.Windows.Forms.GroupBox grpBxAdd;
         private System.Windows.Forms.Label lblChoseType;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblNewSalary;
         private System.Windows.Forms.Label lblNewCompany;
-        private System.Windows.Forms.Label lblNewID;
         private System.Windows.Forms.Label lblNewPhone;
         private System.Windows.Forms.Label lblNewLName;
         private System.Windows.Forms.Label lblNewFName;
         private System.Windows.Forms.Label lblTitleNew;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox tbxNewSlary;
+        private System.Windows.Forms.TextBox tbxNewTitle;
+        private System.Windows.Forms.TextBox tbxNewSalary;
         private System.Windows.Forms.TextBox tbxNewCompany;
-        private System.Windows.Forms.TextBox tbxNewID;
         private System.Windows.Forms.TextBox tbxNewPhone;
         private System.Windows.Forms.TextBox tbxNewLName;
         private System.Windows.Forms.TextBox tbxNewFName;
         private System.Windows.Forms.Button btnCancelNew;
         private System.Windows.Forms.Label lblStats;
         private System.Windows.Forms.GroupBox grpBxViewEdit;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblSalary;
         private System.Windows.Forms.Label lblCompany;
         private System.Windows.Forms.Label lblIDs;
@@ -571,8 +460,6 @@
         private System.Windows.Forms.Label lblFName;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TextBox txbTitle;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox txbSalary;
         private System.Windows.Forms.TextBox txbCompany;
         private System.Windows.Forms.TextBox txbIDs;

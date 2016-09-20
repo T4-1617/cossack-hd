@@ -15,6 +15,12 @@ namespace CRMV3
         public string FirstName;
         public string LastName;
         public string Phone;
+
+        public override string ToString()
+        {
+            return String.Format("{0} {1} {2}", FirstName, LastName, Phone);
+        }
+
     }
 
 
@@ -25,6 +31,12 @@ namespace CRMV3
         }
 
         public int ID;
+
+
+        public override string ToString()
+        {
+            return String.Format("{0} {1} {2} {3}", FirstName, LastName, Phone, ID);
+        }
     }
 
     public class Employee : Contact
@@ -37,6 +49,12 @@ namespace CRMV3
         public float Salary;
         public int ID;
         public string Title;
+
+        public override string ToString()
+        {
+            return String.Format("{0} {1} {2} {3} {4} {5}", Title, FirstName, LastName, Phone, ID, Salary);
+        }
+
     }
 
     public class Distributor : Contact
@@ -46,5 +64,11 @@ namespace CRMV3
         }
 
         public string Company;
+
+        public override string ToString()
+        {
+            return String.Format("{0} {1} {2} {3}", FirstName, LastName, Phone, Company);
+        }
+
     }
 }
