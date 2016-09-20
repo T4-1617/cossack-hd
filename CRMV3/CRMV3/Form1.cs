@@ -246,6 +246,20 @@ namespace CRMV3
         }
 
 
+        private void cbxShowCustomers_CheckedChanged(object sender, EventArgs e)
+        {
+            updateListBox();
+        }
+
+        private void cbxShowEmployees_CheckedChanged(object sender, EventArgs e)
+        {
+            updateListBox();
+        }
+
+        private void cbxShowDistributors_CheckedChanged(object sender, EventArgs e)
+        {
+            updateListBox();
+        }
 
         private void updateListBox()
         {
@@ -365,19 +379,6 @@ namespace CRMV3
             tbxNewTitle.Text = String.Empty;
         }
 
-        private void cbxShowCustomers_CheckedChanged(object sender, EventArgs e)
-        {
-            updateListBox();
-        }
 
-        private void cbxShowEmployees_CheckedChanged(object sender, EventArgs e)
-        {
-            updateListBox();
-        }
-
-        private void cbxShowDistributors_CheckedChanged(object sender, EventArgs e)
-        {
-            updateListBox();
-        }
     }
 }
