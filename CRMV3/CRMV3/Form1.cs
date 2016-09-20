@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using classesLibrary;
 
 namespace CRMV3
 {
@@ -211,6 +212,8 @@ namespace CRMV3
 
             lbxView_SelectedIndexChanged(sender, e);
 
+            updateListBox();
+
         }
 
         private void btnCancelEdit_Click(object sender, EventArgs e)
@@ -317,7 +320,5 @@ namespace CRMV3
             tbxNewSalary.Text = String.Empty;
             tbxNewTitle.Text = String.Empty;
         }
-
-
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CRMV3
+namespace classesLibrary
 {
     public abstract class Contact
     {
