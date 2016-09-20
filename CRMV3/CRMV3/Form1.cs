@@ -25,6 +25,8 @@ namespace CRMV3
             cmbxNewType.Items.Add("Kund");
             cmbxNewType.Items.Add("Anställd");
             cmbxNewType.Items.Add("Leverantör");
+
+            cmbxNewType.SelectedIndex = 0;
         }
 
         
@@ -83,9 +85,17 @@ namespace CRMV3
             tbxNewPhone.Text = String.Empty;
             tbxNewSalary.Text = String.Empty;
             tbxNewTitle.Text = String.Empty;
+
+
+            emptyNewContactTextBoxes();
         }
 
 
+
+        private void btnCancelNew_Click(object sender, EventArgs e)
+        {
+            emptyNewContactTextBoxes();
+        }
 
         private void lbxView_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -97,6 +107,19 @@ namespace CRMV3
             txbTitle.Text = String.Empty;
             txbSalary.Text = String.Empty;
             txbPhone.Text = String.Empty;
+            txbIDs.Text = String.Empty;
+            txbCompany.Text = String.Empty;
+
+            txbTitle.ReadOnly = true;
+            txbSalary.ReadOnly = true;
+            txbFName.ReadOnly = true;
+            txbLName.ReadOnly = true;
+            txbTitle.ReadOnly = true;
+            txbSalary.ReadOnly = true;
+            txbPhone.ReadOnly = true;
+            txbIDs.ReadOnly = true;
+            txbCompany.ReadOnly = true;
+
 
 
             if (lbxView.SelectedIndex != -1) //if the index is proper
@@ -108,6 +131,11 @@ namespace CRMV3
                     txbLName.Text = cus.LastName;
                     txbPhone.Text = cus.Phone;
                     txbIDs.Text = cus.ID.ToString();
+
+                    txbFName.ReadOnly = false;
+                    txbLName.ReadOnly = false;
+                    txbPhone.ReadOnly = false;
+                    txbIDs.ReadOnly = true;
                 }
 
                 if (lbxView.SelectedItem is Employee)
@@ -119,6 +147,14 @@ namespace CRMV3
                     txbIDs.Text = emp.ID.ToString();
                     txbTitle.Text = emp.Title;
                     txbSalary.Text = emp.Salary.ToString();
+
+                    txbFName.ReadOnly = false;
+                    txbLName.ReadOnly = false;
+                    txbPhone.ReadOnly = false;
+                    txbIDs.ReadOnly = true;
+                    txbTitle.ReadOnly = false;
+                    txbSalary.ReadOnly = false;
+
                 }
 
                 if (lbxView.SelectedItem is Distributor)
@@ -128,10 +164,60 @@ namespace CRMV3
                     txbLName.Text = dis.LastName;
                     txbPhone.Text = dis.Phone;
                     txbCompany.Text = dis.Company;
+
+                    txbFName.ReadOnly = false;
+                    txbLName.ReadOnly = false;
+                    txbPhone.ReadOnly = false;
+                    txbCompany.ReadOnly = false;
                 }
 
             }
         }
+
+        private void btnSaveEdit_Click(object sender, EventArgs e)
+        {
+            if (lbxView.SelectedItem is Customer)
+            {
+                Customer cus = (Customer)lbxView.SelectedItem;
+
+                cus.FirstName = txbFName.Text;
+                cus.LastName = txbLName.Text;
+                cus.Phone = txbPhone.Text;
+                cus.ID = int.Parse(txbIDs.Text);
+            }
+
+
+            if (lbxView.SelectedItem is Employee)
+            {
+                Employee emp = (Employee)lbxView.SelectedItem;
+
+                emp.FirstName = txbFName.Text;
+                emp.LastName = txbLName.Text;
+                emp.Phone = txbPhone.Text;
+                emp.ID = int.Parse(txbIDs.Text);
+                emp.Title = txbTitle.Text;
+                emp.Salary = int.Parse(txbSalary.Text);
+            }
+
+            if (lbxView.SelectedItem is Distributor)
+            {
+                Distributor dis = (Distributor)lbxView.SelectedItem;
+
+                dis.FirstName = txbFName.Text;
+                dis.LastName = txbLName.Text;
+                dis.Phone = txbPhone.Text;
+                dis.Company = txbCompany.Text;
+            }
+
+            lbxView_SelectedIndexChanged(sender, e);
+
+        }
+
+        private void btnCancelEdit_Click(object sender, EventArgs e)
+        {
+            lbxView_SelectedIndexChanged(sender, e);
+        }
+
 
 
         private void updateListBox()
@@ -219,6 +305,17 @@ namespace CRMV3
                 tbxNewTitle.ReadOnly = true;
                 tbxNewCompany.ReadOnly = true;
             }
+        }
+
+
+        private void emptyNewContactTextBoxes()
+        {
+            tbxNewCompany.Text = String.Empty;
+            tbxNewFName.Text = String.Empty;
+            tbxNewLName.Text = String.Empty;
+            tbxNewPhone.Text = String.Empty;
+            tbxNewSalary.Text = String.Empty;
+            tbxNewTitle.Text = String.Empty;
         }
 
 

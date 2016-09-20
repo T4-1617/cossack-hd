@@ -129,6 +129,7 @@
             this.btnCancelNew.TabIndex = 2;
             this.btnCancelNew.Text = "Avbryt";
             this.btnCancelNew.UseVisualStyleBackColor = true;
+            this.btnCancelNew.Click += new System.EventHandler(this.btnCancelNew_Click);
             // 
             // lblStats
             // 
@@ -172,6 +173,7 @@
             this.btnSaveEdit.TabIndex = 3;
             this.btnSaveEdit.Text = "Spara ändringar";
             this.btnSaveEdit.UseVisualStyleBackColor = true;
+            this.btnSaveEdit.Click += new System.EventHandler(this.btnSaveEdit_Click);
             // 
             // btnCancelEdit
             // 
@@ -181,6 +183,7 @@
             this.btnCancelEdit.TabIndex = 4;
             this.btnCancelEdit.Text = "Avbryt";
             this.btnCancelEdit.UseVisualStyleBackColor = true;
+            this.btnCancelEdit.Click += new System.EventHandler(this.btnCancelEdit_Click);
             // 
             // txbFName
             // 
