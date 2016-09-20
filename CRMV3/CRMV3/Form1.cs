@@ -28,9 +28,13 @@ namespace CRMV3
             cmbxNewType.Items.Add("Leverantör");
 
             cmbxNewType.SelectedIndex = 0;
+
+            cbxShowCustomers.Checked = true;
+            cbxShowDistributors.Checked = true;
+            cbxShowEmployees.Checked = true;
         }
 
-        
+
         private void cmbxNewType_SelectedIndexChanged(object sender, EventArgs e)
         {   //when chosing an option in add menu, set according textboxes as read only or writeable
             activateAddControls(true);
@@ -89,6 +93,26 @@ namespace CRMV3
 
 
             emptyNewContactTextBoxes();
+
+
+            int customersCount = 0;
+            int employeesCount = 0;
+            int distributorsCount = 0;
+
+
+            foreach (var con in contacts)
+            {
+                if (con is Customer)              
+                    customersCount++;
+                if (con is Employee)
+                    employeesCount++;
+                if (con is Distributor)
+                    distributorsCount++;
+            }
+
+
+            lblStats.Text = String.Format("Det finns {0} kunder, {1} anställda och {2} leverantörer registrerade i CRM.",
+                customersCount.ToString(), employeesCount.ToString(), distributorsCount.ToString());
         }
 
 
@@ -229,8 +253,28 @@ namespace CRMV3
 
             foreach (var v in contacts)
             {
-                lbxView.Items.Add(v);
+                if (v is Customer && cbxShowCustomers.Checked)
+                {
+                    lbxView.Items.Add(v);
+                }
             }
+
+            foreach (var v in contacts)
+            {
+                if (v is Employee && cbxShowEmployees.Checked)
+                {
+                    lbxView.Items.Add(v);
+                }
+            }
+
+            foreach (var v in contacts)
+            {
+                if (v is Distributor && cbxShowDistributors.Checked)
+                {
+                    lbxView.Items.Add(v);
+                }
+            }
+
         }
 
         private int genEmpID() //generates employee ID starting with 0
@@ -319,6 +363,21 @@ namespace CRMV3
             tbxNewPhone.Text = String.Empty;
             tbxNewSalary.Text = String.Empty;
             tbxNewTitle.Text = String.Empty;
+        }
+
+        private void cbxShowCustomers_CheckedChanged(object sender, EventArgs e)
+        {
+            updateListBox();
+        }
+
+        private void cbxShowEmployees_CheckedChanged(object sender, EventArgs e)
+        {
+            updateListBox();
+        }
+
+        private void cbxShowDistributors_CheckedChanged(object sender, EventArgs e)
+        {
+            updateListBox();
         }
     }
 }

@@ -64,6 +64,9 @@
             this.tbxNewLName = new System.Windows.Forms.TextBox();
             this.tbxNewFName = new System.Windows.Forms.TextBox();
             this.lblChoseType = new System.Windows.Forms.Label();
+            this.cbxShowCustomers = new System.Windows.Forms.CheckBox();
+            this.cbxShowEmployees = new System.Windows.Forms.CheckBox();
+            this.cbxShowDistributors = new System.Windows.Forms.CheckBox();
             this.grpBxAdd.SuspendLayout();
             this.grpBxViewEdit.SuspendLayout();
             this.SuspendLayout();
@@ -90,9 +93,9 @@
             // lbxView
             // 
             this.lbxView.FormattingEnabled = true;
-            this.lbxView.Location = new System.Drawing.Point(6, 28);
+            this.lbxView.Location = new System.Drawing.Point(6, 65);
             this.lbxView.Name = "lbxView";
-            this.lbxView.Size = new System.Drawing.Size(191, 147);
+            this.lbxView.Size = new System.Drawing.Size(191, 134);
             this.lbxView.TabIndex = 2;
             this.lbxView.SelectedIndexChanged += new System.EventHandler(this.lbxView_SelectedIndexChanged);
             // 
@@ -134,13 +137,17 @@
             // lblStats
             // 
             this.lblStats.AutoSize = true;
-            this.lblStats.Location = new System.Drawing.Point(12, 158);
+            this.lblStats.Location = new System.Drawing.Point(16, 207);
             this.lblStats.Name = "lblStats";
-            this.lblStats.Size = new System.Drawing.Size(0, 13);
+            this.lblStats.Size = new System.Drawing.Size(172, 13);
             this.lblStats.TabIndex = 4;
+            this.lblStats.Text = "Det finns inga kontakter för tillfället.";
             // 
             // grpBxViewEdit
             // 
+            this.grpBxViewEdit.Controls.Add(this.cbxShowDistributors);
+            this.grpBxViewEdit.Controls.Add(this.cbxShowEmployees);
+            this.grpBxViewEdit.Controls.Add(this.cbxShowCustomers);
             this.grpBxViewEdit.Controls.Add(this.lblSalary);
             this.grpBxViewEdit.Controls.Add(this.lblCompany);
             this.grpBxViewEdit.Controls.Add(this.lblIDs);
@@ -158,16 +165,16 @@
             this.grpBxViewEdit.Controls.Add(this.btnCancelEdit);
             this.grpBxViewEdit.Controls.Add(this.btnSaveEdit);
             this.grpBxViewEdit.Controls.Add(this.lbxView);
-            this.grpBxViewEdit.Location = new System.Drawing.Point(12, 213);
+            this.grpBxViewEdit.Location = new System.Drawing.Point(12, 232);
             this.grpBxViewEdit.Name = "grpBxViewEdit";
-            this.grpBxViewEdit.Size = new System.Drawing.Size(628, 192);
+            this.grpBxViewEdit.Size = new System.Drawing.Size(628, 204);
             this.grpBxViewEdit.TabIndex = 5;
             this.grpBxViewEdit.TabStop = false;
             this.grpBxViewEdit.Text = "Se och redigera kontakter:";
             // 
             // btnSaveEdit
             // 
-            this.btnSaveEdit.Location = new System.Drawing.Point(438, 163);
+            this.btnSaveEdit.Location = new System.Drawing.Point(438, 179);
             this.btnSaveEdit.Name = "btnSaveEdit";
             this.btnSaveEdit.Size = new System.Drawing.Size(103, 23);
             this.btnSaveEdit.TabIndex = 3;
@@ -177,7 +184,7 @@
             // 
             // btnCancelEdit
             // 
-            this.btnCancelEdit.Location = new System.Drawing.Point(547, 163);
+            this.btnCancelEdit.Location = new System.Drawing.Point(547, 179);
             this.btnCancelEdit.Name = "btnCancelEdit";
             this.btnCancelEdit.Size = new System.Drawing.Size(75, 23);
             this.btnCancelEdit.TabIndex = 4;
@@ -187,7 +194,7 @@
             // 
             // txbFName
             // 
-            this.txbFName.Location = new System.Drawing.Point(351, 28);
+            this.txbFName.Location = new System.Drawing.Point(351, 44);
             this.txbFName.Name = "txbFName";
             this.txbFName.ReadOnly = true;
             this.txbFName.Size = new System.Drawing.Size(100, 20);
@@ -195,7 +202,7 @@
             // 
             // txbLName
             // 
-            this.txbLName.Location = new System.Drawing.Point(351, 54);
+            this.txbLName.Location = new System.Drawing.Point(351, 70);
             this.txbLName.Name = "txbLName";
             this.txbLName.ReadOnly = true;
             this.txbLName.Size = new System.Drawing.Size(100, 20);
@@ -203,7 +210,7 @@
             // 
             // txbPhone
             // 
-            this.txbPhone.Location = new System.Drawing.Point(351, 80);
+            this.txbPhone.Location = new System.Drawing.Point(351, 96);
             this.txbPhone.Name = "txbPhone";
             this.txbPhone.ReadOnly = true;
             this.txbPhone.Size = new System.Drawing.Size(100, 20);
@@ -211,7 +218,7 @@
             // 
             // txbIDs
             // 
-            this.txbIDs.Location = new System.Drawing.Point(522, 80);
+            this.txbIDs.Location = new System.Drawing.Point(522, 96);
             this.txbIDs.Name = "txbIDs";
             this.txbIDs.ReadOnly = true;
             this.txbIDs.Size = new System.Drawing.Size(100, 20);
@@ -219,7 +226,7 @@
             // 
             // txbCompany
             // 
-            this.txbCompany.Location = new System.Drawing.Point(522, 28);
+            this.txbCompany.Location = new System.Drawing.Point(522, 44);
             this.txbCompany.Name = "txbCompany";
             this.txbCompany.ReadOnly = true;
             this.txbCompany.Size = new System.Drawing.Size(100, 20);
@@ -227,7 +234,7 @@
             // 
             // txbSalary
             // 
-            this.txbSalary.Location = new System.Drawing.Point(522, 54);
+            this.txbSalary.Location = new System.Drawing.Point(522, 70);
             this.txbSalary.Name = "txbSalary";
             this.txbSalary.ReadOnly = true;
             this.txbSalary.Size = new System.Drawing.Size(100, 20);
@@ -235,7 +242,7 @@
             // 
             // txbTitle
             // 
-            this.txbTitle.Location = new System.Drawing.Point(237, 28);
+            this.txbTitle.Location = new System.Drawing.Point(237, 44);
             this.txbTitle.Name = "txbTitle";
             this.txbTitle.ReadOnly = true;
             this.txbTitle.Size = new System.Drawing.Size(52, 20);
@@ -244,7 +251,7 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(203, 31);
+            this.lblTitle.Location = new System.Drawing.Point(203, 47);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(30, 13);
             this.lblTitle.TabIndex = 7;
@@ -253,7 +260,7 @@
             // lblFName
             // 
             this.lblFName.AutoSize = true;
-            this.lblFName.Location = new System.Drawing.Point(297, 31);
+            this.lblFName.Location = new System.Drawing.Point(297, 47);
             this.lblFName.Name = "lblFName";
             this.lblFName.Size = new System.Drawing.Size(51, 13);
             this.lblFName.TabIndex = 7;
@@ -262,7 +269,7 @@
             // lblLName
             // 
             this.lblLName.AutoSize = true;
-            this.lblLName.Location = new System.Drawing.Point(290, 57);
+            this.lblLName.Location = new System.Drawing.Point(290, 73);
             this.lblLName.Name = "lblLName";
             this.lblLName.Size = new System.Drawing.Size(58, 13);
             this.lblLName.TabIndex = 7;
@@ -271,7 +278,7 @@
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
-            this.lblPhone.Location = new System.Drawing.Point(302, 83);
+            this.lblPhone.Location = new System.Drawing.Point(302, 99);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(46, 13);
             this.lblPhone.TabIndex = 7;
@@ -280,7 +287,7 @@
             // lblIDs
             // 
             this.lblIDs.AutoSize = true;
-            this.lblIDs.Location = new System.Drawing.Point(498, 83);
+            this.lblIDs.Location = new System.Drawing.Point(498, 99);
             this.lblIDs.Name = "lblIDs";
             this.lblIDs.Size = new System.Drawing.Size(21, 13);
             this.lblIDs.TabIndex = 7;
@@ -289,7 +296,7 @@
             // lblCompany
             // 
             this.lblCompany.AutoSize = true;
-            this.lblCompany.Location = new System.Drawing.Point(474, 31);
+            this.lblCompany.Location = new System.Drawing.Point(474, 47);
             this.lblCompany.Name = "lblCompany";
             this.lblCompany.Size = new System.Drawing.Size(46, 13);
             this.lblCompany.TabIndex = 7;
@@ -298,7 +305,7 @@
             // lblSalary
             // 
             this.lblSalary.AutoSize = true;
-            this.lblSalary.Location = new System.Drawing.Point(491, 57);
+            this.lblSalary.Location = new System.Drawing.Point(491, 73);
             this.lblSalary.Name = "lblSalary";
             this.lblSalary.Size = new System.Drawing.Size(28, 13);
             this.lblSalary.TabIndex = 7;
@@ -415,11 +422,44 @@
             this.lblChoseType.TabIndex = 26;
             this.lblChoseType.Text = "Välj typ:";
             // 
+            // cbxShowCustomers
+            // 
+            this.cbxShowCustomers.AutoSize = true;
+            this.cbxShowCustomers.Location = new System.Drawing.Point(7, 21);
+            this.cbxShowCustomers.Name = "cbxShowCustomers";
+            this.cbxShowCustomers.Size = new System.Drawing.Size(60, 17);
+            this.cbxShowCustomers.TabIndex = 8;
+            this.cbxShowCustomers.Text = "Kunder";
+            this.cbxShowCustomers.UseVisualStyleBackColor = true;
+            this.cbxShowCustomers.CheckedChanged += new System.EventHandler(this.cbxShowCustomers_CheckedChanged);
+            // 
+            // cbxShowEmployees
+            // 
+            this.cbxShowEmployees.AutoSize = true;
+            this.cbxShowEmployees.Location = new System.Drawing.Point(73, 21);
+            this.cbxShowEmployees.Name = "cbxShowEmployees";
+            this.cbxShowEmployees.Size = new System.Drawing.Size(69, 17);
+            this.cbxShowEmployees.TabIndex = 8;
+            this.cbxShowEmployees.Text = "Anställda";
+            this.cbxShowEmployees.UseVisualStyleBackColor = true;
+            this.cbxShowEmployees.CheckedChanged += new System.EventHandler(this.cbxShowEmployees_CheckedChanged);
+            // 
+            // cbxShowDistributors
+            // 
+            this.cbxShowDistributors.AutoSize = true;
+            this.cbxShowDistributors.Location = new System.Drawing.Point(145, 21);
+            this.cbxShowDistributors.Name = "cbxShowDistributors";
+            this.cbxShowDistributors.Size = new System.Drawing.Size(88, 17);
+            this.cbxShowDistributors.TabIndex = 8;
+            this.cbxShowDistributors.Text = "Reverantörer";
+            this.cbxShowDistributors.UseVisualStyleBackColor = true;
+            this.cbxShowDistributors.CheckedChanged += new System.EventHandler(this.cbxShowDistributors_CheckedChanged);
+            // 
             // CRMV3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(658, 418);
+            this.ClientSize = new System.Drawing.Size(658, 448);
             this.Controls.Add(this.lblStats);
             this.Controls.Add(this.grpBxAdd);
             this.Controls.Add(this.grpBxViewEdit);
@@ -472,6 +512,9 @@
         private System.Windows.Forms.TextBox txbFName;
         private System.Windows.Forms.Button btnCancelEdit;
         private System.Windows.Forms.Button btnSaveEdit;
+        private System.Windows.Forms.CheckBox cbxShowDistributors;
+        private System.Windows.Forms.CheckBox cbxShowEmployees;
+        private System.Windows.Forms.CheckBox cbxShowCustomers;
     }
 }
 
