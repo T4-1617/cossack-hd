@@ -18,9 +18,8 @@ namespace CRMV3
 
         public override string ToString()
         {
-            return String.Format("{0} {1} {2}", FirstName, LastName, Phone);
+            return String.Format("{0} {1}", FirstName, LastName);
         }
-
     }
 
 
@@ -31,17 +30,10 @@ namespace CRMV3
         }
 
         public int ID;
-
-
-        public override string ToString()
-        {
-            return String.Format("{0} {1} {2} {3}", FirstName, LastName, Phone, ID);
-        }
     }
 
     public class Employee : Contact
     {
-
         public Employee()
         {
         }
@@ -49,11 +41,6 @@ namespace CRMV3
         public float Salary;
         public int ID;
         public string Title;
-
-        public override string ToString()
-        {
-            return String.Format("{0} {1} {2} {3} {4} {5}", Title, FirstName, LastName, Phone, ID, Salary);
-        }
 
     }
 
@@ -64,11 +51,5 @@ namespace CRMV3
         }
 
         public string Company;
-
-        public override string ToString()
-        {
-            return String.Format("{0} {1} {2} {3}", FirstName, LastName, Phone, Company);
-        }
-
     }
 }

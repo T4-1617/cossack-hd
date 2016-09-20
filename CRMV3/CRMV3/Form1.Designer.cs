@@ -94,6 +94,7 @@
             this.lbxView.Name = "lbxView";
             this.lbxView.Size = new System.Drawing.Size(191, 147);
             this.lbxView.TabIndex = 2;
+            this.lbxView.SelectedIndexChanged += new System.EventHandler(this.lbxView_SelectedIndexChanged);
             // 
             // grpBxAdd
             // 
@@ -276,11 +277,11 @@
             // lblIDs
             // 
             this.lblIDs.AutoSize = true;
-            this.lblIDs.Location = new System.Drawing.Point(463, 83);
+            this.lblIDs.Location = new System.Drawing.Point(498, 83);
             this.lblIDs.Name = "lblIDs";
-            this.lblIDs.Size = new System.Drawing.Size(57, 13);
+            this.lblIDs.Size = new System.Drawing.Size(21, 13);
             this.lblIDs.TabIndex = 7;
-            this.lblIDs.Text = "PLCHLDR";
+            this.lblIDs.Text = "ID:";
             // 
             // lblCompany
             // 
