@@ -12,9 +12,19 @@ namespace CRMV3
 {
     public partial class CRMV3 : Form
     {
+
+
+        public System.Collections.ArrayList contacts; 
+
+
         public CRMV3()
         {
+            contacts = new System.Collections.ArrayList();
             InitializeComponent();
+
+
+
+            
         }
     }
 }
