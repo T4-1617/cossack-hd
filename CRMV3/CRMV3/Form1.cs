@@ -44,9 +44,9 @@ namespace CRMV3
         //when saving a new contact
         private void btnSaveNew_Click(object sender, EventArgs e)
         {
-            switch ((string)cmbxNewType.SelectedItem) //depending on selected option
+            switch (cmbxNewType.SelectedIndex) //depending on selected option
             {
-                case "Kund": //add new contacts  accordingly
+                case 0: //add new contacts  accordingly
                     contacts.Add(new Customer()
                     {
                         FirstName = tbxNewFName.Text,
@@ -56,7 +56,11 @@ namespace CRMV3
                     });
                     break;
 
-                case "Anställd":
+                case 1:
+
+                    if (tbxNewSalary.Text == string.Empty)
+                        tbxNewSalary.Text = "0";
+
                     contacts.Add(new Employee()
                     {
                         FirstName = tbxNewFName.Text,
@@ -68,7 +72,7 @@ namespace CRMV3
                     });
                     break;
 
-                case "Leverantör":
+                case 2:
                     contacts.Add(new Distributor()
                     {
                         FirstName = tbxNewFName.Text,
@@ -83,22 +87,11 @@ namespace CRMV3
             }
 
             updateListBox(); //update the listbox which displays all existing contacts
-
-            tbxNewCompany.Text = String.Empty; //empty the textboxes
-            tbxNewFName.Text = String.Empty;
-            tbxNewLName.Text = String.Empty;
-            tbxNewPhone.Text = String.Empty;
-            tbxNewSalary.Text = String.Empty;
-            tbxNewTitle.Text = String.Empty;
-
-
             emptyNewContactTextBoxes();
-
 
             int customersCount = 0;
             int employeesCount = 0;
             int distributorsCount = 0;
-
 
             foreach (var con in contacts)
             {
@@ -109,13 +102,9 @@ namespace CRMV3
                 if (con is Distributor)
                     distributorsCount++;
             }
-
-
             lblStats.Text = String.Format("Det finns {0} kunder, {1} anställda och {2} leverantörer registrerade i CRM.",
                 customersCount.ToString(), employeesCount.ToString(), distributorsCount.ToString());
         }
-
-
 
         private void btnCancelNew_Click(object sender, EventArgs e)
         {
@@ -145,8 +134,6 @@ namespace CRMV3
             txbIDs.ReadOnly = true;
             txbCompany.ReadOnly = true;
 
-
-
             if (lbxView.SelectedIndex != -1) //if the index is proper
             {
                 if (lbxView.SelectedItem is Customer) //depending on contact type
@@ -160,7 +147,6 @@ namespace CRMV3
                     txbFName.ReadOnly = false;
                     txbLName.ReadOnly = false;
                     txbPhone.ReadOnly = false;
-                    txbIDs.ReadOnly = true;
                 }
 
                 if (lbxView.SelectedItem is Employee)
@@ -176,10 +162,8 @@ namespace CRMV3
                     txbFName.ReadOnly = false;
                     txbLName.ReadOnly = false;
                     txbPhone.ReadOnly = false;
-                    txbIDs.ReadOnly = true;
                     txbTitle.ReadOnly = false;
                     txbSalary.ReadOnly = false;
-
                 }
 
                 if (lbxView.SelectedItem is Distributor)
@@ -195,7 +179,6 @@ namespace CRMV3
                     txbPhone.ReadOnly = false;
                     txbCompany.ReadOnly = false;
                 }
-
             }
         }
 
@@ -210,7 +193,6 @@ namespace CRMV3
                 cus.Phone = txbPhone.Text;
                 cus.ID = int.Parse(txbIDs.Text);
             }
-
 
             if (lbxView.SelectedItem is Employee)
             {
@@ -235,9 +217,7 @@ namespace CRMV3
             }
 
             lbxView_SelectedIndexChanged(sender, e);
-
             updateListBox();
-
         }
 
         private void btnCancelEdit_Click(object sender, EventArgs e)
@@ -245,20 +225,22 @@ namespace CRMV3
             lbxView_SelectedIndexChanged(sender, e);
         }
 
-
         private void cbxShowCustomers_CheckedChanged(object sender, EventArgs e)
         {
             updateListBox();
+            lbxView.SelectedIndex = -1;
         }
 
         private void cbxShowEmployees_CheckedChanged(object sender, EventArgs e)
         {
             updateListBox();
+            lbxView.SelectedIndex = -1;
         }
 
         private void cbxShowDistributors_CheckedChanged(object sender, EventArgs e)
         {
             updateListBox();
+            lbxView.SelectedIndex = -1;
         }
 
         private void updateListBox()
@@ -268,27 +250,20 @@ namespace CRMV3
             foreach (var v in contacts)
             {
                 if (v is Customer && cbxShowCustomers.Checked)
-                {
                     lbxView.Items.Add(v);
-                }
             }
 
             foreach (var v in contacts)
             {
                 if (v is Employee && cbxShowEmployees.Checked)
-                {
                     lbxView.Items.Add(v);
-                }
             }
 
             foreach (var v in contacts)
             {
                 if (v is Distributor && cbxShowDistributors.Checked)
-                {
                     lbxView.Items.Add(v);
-                }
             }
-
         }
 
         private int genEmpID() //generates employee ID starting with 0
@@ -297,9 +272,7 @@ namespace CRMV3
             for (int i = 0; i < contacts.Count; i++)
             {
                 if (contacts[i] is Employee)
-                {
                     j++;
-                }
             }
             return j;
         }
@@ -327,11 +300,7 @@ namespace CRMV3
                 }
             }
             return random;
-
         }
-
-
-
 
         private void activateAddControls(bool state)
         {
@@ -359,15 +328,7 @@ namespace CRMV3
                     tbxNewCompany.ReadOnly = true;
                     break;
             }
-
-            if (state == false)
-            {
-                tbxNewSalary.ReadOnly = true;
-                tbxNewTitle.ReadOnly = true;
-                tbxNewCompany.ReadOnly = true;
-            }
         }
-
 
         private void emptyNewContactTextBoxes()
         {
@@ -378,7 +339,5 @@ namespace CRMV3
             tbxNewSalary.Text = String.Empty;
             tbxNewTitle.Text = String.Empty;
         }
-
-
     }
 }
