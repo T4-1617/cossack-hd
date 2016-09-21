@@ -136,12 +136,15 @@ namespace CRMV3
 
             if (lbxView.SelectedIndex != -1) //if the index is proper
             {
+                Contact c = (Contact)lbxView.SelectedItem;
+
+                txbFName.Text = c.FirstName;
+                txbLName.Text = c.LastName;
+                txbPhone.Text = c.Phone;
+
                 if (lbxView.SelectedItem is Customer) //depending on contact type
                 {
                     Customer cus = (Customer)lbxView.SelectedItem; //show information in textboxes according to the type
-                    txbFName.Text = cus.FirstName;
-                    txbLName.Text = cus.LastName;
-                    txbPhone.Text = cus.Phone;
                     txbIDs.Text = cus.ID.ToString();
 
                     txbFName.ReadOnly = false;
@@ -152,9 +155,6 @@ namespace CRMV3
                 if (lbxView.SelectedItem is Employee)
                 {
                     Employee emp = (Employee)lbxView.SelectedItem;
-                    txbFName.Text = emp.FirstName;
-                    txbLName.Text = emp.LastName;
-                    txbPhone.Text = emp.Phone;
                     txbIDs.Text = emp.ID.ToString();
                     txbTitle.Text = emp.Title;
                     txbSalary.Text = emp.Salary.ToString();
@@ -169,9 +169,6 @@ namespace CRMV3
                 if (lbxView.SelectedItem is Distributor)
                 {
                     Distributor dis = (Distributor)lbxView.SelectedItem;
-                    txbFName.Text = dis.FirstName;
-                    txbLName.Text = dis.LastName;
-                    txbPhone.Text = dis.Phone;
                     txbCompany.Text = dis.Company;
 
                     txbFName.ReadOnly = false;
@@ -184,35 +181,31 @@ namespace CRMV3
 
         private void btnSaveEdit_Click(object sender, EventArgs e)
         {
-            if (lbxView.SelectedItem is Customer)
-            {
-                Customer cus = (Customer)lbxView.SelectedItem;
 
-                cus.FirstName = txbFName.Text;
-                cus.LastName = txbLName.Text;
-                cus.Phone = txbPhone.Text;
-                cus.ID = int.Parse(txbIDs.Text);
+            Contact c = (Contact)lbxView.SelectedItem;
+            c.FirstName = txbFName.Text;
+            c.LastName = txbLName.Text;
+            c.Phone = txbPhone.Text;
+
+            var con = lbxView.SelectedItem;
+
+            if (con is Customer)
+            {
+                Customer contact = (Customer)lbxView.SelectedItem;
+                contact.ID = int.Parse(txbIDs.Text);
             }
 
-            if (lbxView.SelectedItem is Employee)
+            if (con is Employee)
             {
                 Employee emp = (Employee)lbxView.SelectedItem;
-
-                emp.FirstName = txbFName.Text;
-                emp.LastName = txbLName.Text;
-                emp.Phone = txbPhone.Text;
                 emp.ID = int.Parse(txbIDs.Text);
                 emp.Title = txbTitle.Text;
                 emp.Salary = int.Parse(txbSalary.Text);
             }
 
-            if (lbxView.SelectedItem is Distributor)
+            if (con is Distributor)
             {
                 Distributor dis = (Distributor)lbxView.SelectedItem;
-
-                dis.FirstName = txbFName.Text;
-                dis.LastName = txbLName.Text;
-                dis.Phone = txbPhone.Text;
                 dis.Company = txbCompany.Text;
             }
 
