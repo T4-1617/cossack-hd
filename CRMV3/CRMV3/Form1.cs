@@ -18,11 +18,9 @@ namespace CRMV3
 
         public CRMV3()
         {
-            //Create array for contacts
             contacts = new System.Collections.ArrayList();
             InitializeComponent();
 
-            //add options to Combo Box
             cmbxNewType.Items.Add("Kund");
             cmbxNewType.Items.Add("Anställd");
             cmbxNewType.Items.Add("Leverantör");
@@ -36,12 +34,30 @@ namespace CRMV3
 
 
         private void cmbxNewType_SelectedIndexChanged(object sender, EventArgs e)
-        {   //when chosing an option in add menu, set according textboxes as read only or writeable
-            activateAddControls(true);
+        { 
+            tbxNewFName.ReadOnly = false;
+            tbxNewLName.ReadOnly = false;
+            tbxNewPhone.ReadOnly = false;
+            tbxNewSalary.ReadOnly = true;
+            tbxNewTitle.ReadOnly = true;
+            tbxNewCompany.ReadOnly = true;
+
+            switch ((string)cmbxNewType.SelectedItem)
+            {
+                case "Anställd":
+                    tbxNewSalary.ReadOnly = false;
+                    tbxNewTitle.ReadOnly = false;
+                    break;
+
+                case "Leverantör":
+                    tbxNewCompany.ReadOnly = false;
+                    break;
+
+                default:
+                    break;
+            }
         }
 
-
-        //when saving a new contact
         private void btnSaveNew_Click(object sender, EventArgs e)
         {
             switch (cmbxNewType.SelectedIndex) //depending on selected option
@@ -113,7 +129,6 @@ namespace CRMV3
 
         private void lbxView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //selected a new item in the listbox
             txbTitle.Text = String.Empty; //empty the textboxes in view area
             txbSalary.Text = String.Empty;
             txbFName.Text = String.Empty;
@@ -126,13 +141,12 @@ namespace CRMV3
 
             txbTitle.ReadOnly = true;
             txbSalary.ReadOnly = true;
-            txbFName.ReadOnly = true;
-            txbLName.ReadOnly = true;
-            txbTitle.ReadOnly = true;
             txbSalary.ReadOnly = true;
-            txbPhone.ReadOnly = true;
             txbIDs.ReadOnly = true;
             txbCompany.ReadOnly = true;
+            txbFName.ReadOnly = false;
+            txbLName.ReadOnly = false;
+            txbPhone.ReadOnly = false;
 
             if (lbxView.SelectedIndex != -1) //if the index is proper
             {
@@ -146,10 +160,6 @@ namespace CRMV3
                 {
                     Customer cus = (Customer)lbxView.SelectedItem; //show information in textboxes according to the type
                     txbIDs.Text = cus.ID.ToString();
-
-                    txbFName.ReadOnly = false;
-                    txbLName.ReadOnly = false;
-                    txbPhone.ReadOnly = false;
                 }
 
                 if (lbxView.SelectedItem is Employee)
@@ -158,10 +168,6 @@ namespace CRMV3
                     txbIDs.Text = emp.ID.ToString();
                     txbTitle.Text = emp.Title;
                     txbSalary.Text = emp.Salary.ToString();
-
-                    txbFName.ReadOnly = false;
-                    txbLName.ReadOnly = false;
-                    txbPhone.ReadOnly = false;
                     txbTitle.ReadOnly = false;
                     txbSalary.ReadOnly = false;
                 }
@@ -170,10 +176,6 @@ namespace CRMV3
                 {
                     Distributor dis = (Distributor)lbxView.SelectedItem;
                     txbCompany.Text = dis.Company;
-
-                    txbFName.ReadOnly = false;
-                    txbLName.ReadOnly = false;
-                    txbPhone.ReadOnly = false;
                     txbCompany.ReadOnly = false;
                 }
             }
@@ -181,7 +183,6 @@ namespace CRMV3
 
         private void btnSaveEdit_Click(object sender, EventArgs e)
         {
-
             Contact c = (Contact)lbxView.SelectedItem;
             c.FirstName = txbFName.Text;
             c.LastName = txbLName.Text;
@@ -189,16 +190,9 @@ namespace CRMV3
 
             var con = lbxView.SelectedItem;
 
-            if (con is Customer)
-            {
-                Customer contact = (Customer)lbxView.SelectedItem;
-                contact.ID = int.Parse(txbIDs.Text);
-            }
-
             if (con is Employee)
             {
                 Employee emp = (Employee)lbxView.SelectedItem;
-                emp.ID = int.Parse(txbIDs.Text);
                 emp.Title = txbTitle.Text;
                 emp.Salary = int.Parse(txbSalary.Text);
             }
@@ -277,7 +271,6 @@ namespace CRMV3
             while (uniqueID == false)
             {
                 random = randomGen.Next(0, 9000);
-
                 uniqueID = true;
 
                 for (int i = 0; i < contacts.Count; i++)
@@ -286,41 +279,11 @@ namespace CRMV3
                     {
                         Customer c = (Customer)contacts[i];
                         if (c.ID == random)
-                        {
                             uniqueID = false;
-                        }
                     }
                 }
             }
             return random;
-        }
-
-        private void activateAddControls(bool state)
-        {
-            tbxNewFName.ReadOnly = !state;
-            tbxNewLName.ReadOnly = !state;
-            tbxNewPhone.ReadOnly = !state;
-
-            switch ((string)cmbxNewType.SelectedItem)
-            {
-                case "Anställd":
-                    tbxNewSalary.ReadOnly = !state;
-                    tbxNewTitle.ReadOnly = !state;
-                    tbxNewCompany.ReadOnly = state;
-                    break;
-
-                case "Leverantör":
-                    tbxNewSalary.ReadOnly = state;
-                    tbxNewTitle.ReadOnly = state;
-                    tbxNewCompany.ReadOnly = !state;
-                    break;
-
-                default:
-                    tbxNewSalary.ReadOnly = true;
-                    tbxNewTitle.ReadOnly = true;
-                    tbxNewCompany.ReadOnly = true;
-                    break;
-            }
         }
 
         private void emptyNewContactTextBoxes()
