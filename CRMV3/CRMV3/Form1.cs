@@ -158,13 +158,13 @@ namespace CRMV3
 
                 if (lbxView.SelectedItem is Customer) //depending on contact type
                 {
-                    Customer cus = (Customer)lbxView.SelectedItem; //show information in textboxes according to the type
+                    Customer cus = (Customer)c; 
                     txbIDs.Text = cus.ID.ToString();
                 }
 
                 if (lbxView.SelectedItem is Employee)
                 {
-                    Employee emp = (Employee)lbxView.SelectedItem;
+                    Employee emp = (Employee)c;
                     txbIDs.Text = emp.ID.ToString();
                     txbTitle.Text = emp.Title;
                     txbSalary.Text = emp.Salary.ToString();
@@ -174,7 +174,7 @@ namespace CRMV3
 
                 if (lbxView.SelectedItem is Distributor)
                 {
-                    Distributor dis = (Distributor)lbxView.SelectedItem;
+                    Distributor dis = (Distributor)c;
                     txbCompany.Text = dis.Company;
                     txbCompany.ReadOnly = false;
                 }
