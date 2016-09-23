@@ -7,39 +7,81 @@ using System.Threading.Tasks;
 namespace Online_Banking
 {
 
-    
+
     public class Customer
     {
 
-        Customer(string fName, string lName, long id)
+        public Customer(string fName, string lName)
         {
             this.fName = fName;
             this.lName = lName;
+
         }
-
-
 
         public string fName { get; set; }
         public string lName { get; set; }
-        public long ID { get; set; }
+
+
         public System.Collections.ArrayList accounts = new System.Collections.ArrayList();
+
+        public System.Collections.ArrayList getAccounts()
+        {
+            return accounts;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} {1}", fName, lName);
+        }
+
+
+        public bool createAccount(double initDeposit, long randomAccountNumber)
+        {
+            if (initDeposit >= 500)
+            {
+                accounts.Add(new Account(initDeposit, randomAccountNumber));
+                return true;
+            }
+            else
+                return false;
+        }
     }
+
+
+
 
 
     public class Account
     {
-        public Account()
-        { }
+        public Account(double Money, long AccountNumber)
+        {
+            this.Money = Money;
+            this.AccountNumber = AccountNumber;
+        }
 
-        public double money { get; set; }
+        public bool isComplete = false;
+
+        public double Money { get; set; }
         public System.Collections.ArrayList transactions = new System.Collections.ArrayList();
 
-
+        public long AccountNumber { get; set; }
         public void addTransaction(double value, string information)
         {
             Transaction t = new Transaction(value, information);
             transactions.Add(t);
         }
+
+
+        public override string ToString()
+        {
+            return string.Format("{0}", AccountNumber);
+        }
+
+        public double getMoney()
+        {
+            return Money;
+        }
+
     }
 
 
@@ -54,14 +96,6 @@ namespace Online_Banking
         public double money { get; set; }
         public string information { get; set; }
     }
-
-
-
-
-
-
-
-    
-
-
 }
+
+
