@@ -15,11 +15,10 @@ namespace Online_Banking
         {
             this.fName = fName;
             this.lName = lName;
-
         }
 
-        public string fName { get; set; }
-        public string lName { get; set; }
+        private string fName { get; set; }
+        private string lName { get; set; }
 
 
         public System.Collections.ArrayList accounts = new System.Collections.ArrayList();
@@ -49,32 +48,37 @@ namespace Online_Banking
 
 
 
-
-
     public class Account
     {
         public Account(double Money, long AccountNumber)
         {
-            this.Money = Money;
             this.AccountNumber = AccountNumber;
+            Credit(Money);
         }
 
-        public bool isComplete = false;
-
-        public double Money { get; set; }
+        private double Money { get; set; }
+        public long AccountNumber { get; set; }
         public System.Collections.ArrayList transactions = new System.Collections.ArrayList();
 
-        public long AccountNumber { get; set; }
-        public void addTransaction(double value, string information)
-        {
-            Transaction t = new Transaction(value, information);
-            transactions.Add(t);
-        }
 
 
         public override string ToString()
         {
             return string.Format("{0}", AccountNumber);
+        }
+
+        public void Credit(double value)
+        {
+            Transaction t = new Transaction(value, "Insättning");
+            Money = Money + value;
+            transactions.Add(t);
+        }
+
+        public void Debit(double value)
+        {
+            Transaction t = new Transaction(value, "Uttag");
+            Money = Money - value;
+            transactions.Add(t);
         }
 
         public double getMoney()
@@ -93,8 +97,13 @@ namespace Online_Banking
             this.information = information;
         }
 
-        public double money { get; set; }
-        public string information { get; set; }
+        private double money { get; set; }
+        private string information { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1} SEK", information, money.ToString());
+        }
     }
 }
 

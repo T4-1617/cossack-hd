@@ -56,9 +56,9 @@
             this.btnConfirmTransaction = new System.Windows.Forms.Button();
             this.tbxTransactionValue = new System.Windows.Forms.TextBox();
             this.btnAddNewAccount = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblMoneyOn = new System.Windows.Forms.Label();
+            this.lblChoseAccount = new System.Windows.Forms.Label();
+            this.lblChoseCustomer = new System.Windows.Forms.Label();
             this.tbxDisplayMoney = new System.Windows.Forms.TextBox();
             this.lbxAccounts = new System.Windows.Forms.ListBox();
             this.lbxCustomers = new System.Windows.Forms.ListBox();
@@ -211,6 +211,7 @@
             this.btnMenuRegCus.TabIndex = 2;
             this.btnMenuRegCus.Text = "Registrera dig som kund och öppna första kontot";
             this.btnMenuRegCus.UseVisualStyleBackColor = true;
+            this.btnMenuRegCus.Click += new System.EventHandler(this.btnMenuRegCus_Click);
             // 
             // grpBoxMenu
             // 
@@ -231,15 +232,16 @@
             this.btnMenuBrowse.TabIndex = 2;
             this.btnMenuBrowse.Text = "Se, skapa dina konton och genomföra in/utsättningar";
             this.btnMenuBrowse.UseVisualStyleBackColor = true;
+            this.btnMenuBrowse.Click += new System.EventHandler(this.btnMenuBrowse_Click);
             // 
             // pnlCustManage
             // 
             this.pnlCustManage.Controls.Add(this.pnlAddAccount);
             this.pnlCustManage.Controls.Add(this.grpBoxDoTransaction);
             this.pnlCustManage.Controls.Add(this.btnAddNewAccount);
-            this.pnlCustManage.Controls.Add(this.label9);
-            this.pnlCustManage.Controls.Add(this.label8);
-            this.pnlCustManage.Controls.Add(this.label7);
+            this.pnlCustManage.Controls.Add(this.lblMoneyOn);
+            this.pnlCustManage.Controls.Add(this.lblChoseAccount);
+            this.pnlCustManage.Controls.Add(this.lblChoseCustomer);
             this.pnlCustManage.Controls.Add(this.tbxDisplayMoney);
             this.pnlCustManage.Controls.Add(this.lbxAccounts);
             this.pnlCustManage.Controls.Add(this.lbxCustomers);
@@ -318,6 +320,7 @@
             this.btnAdd.TabIndex = 6;
             this.btnAdd.Text = "Insättning";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnWithDraw
             // 
@@ -327,6 +330,7 @@
             this.btnWithDraw.TabIndex = 7;
             this.btnWithDraw.Text = "Uttag";
             this.btnWithDraw.UseVisualStyleBackColor = true;
+            this.btnWithDraw.Click += new System.EventHandler(this.btnWithDraw_Click);
             // 
             // btnConfirmTransaction
             // 
@@ -336,6 +340,7 @@
             this.btnConfirmTransaction.TabIndex = 9;
             this.btnConfirmTransaction.Text = "oké";
             this.btnConfirmTransaction.UseVisualStyleBackColor = true;
+            this.btnConfirmTransaction.Click += new System.EventHandler(this.btnConfirmTransaction_Click);
             // 
             // tbxTransactionValue
             // 
@@ -354,32 +359,32 @@
             this.btnAddNewAccount.UseVisualStyleBackColor = true;
             this.btnAddNewAccount.Click += new System.EventHandler(this.btnAddNewAccount_Click);
             // 
-            // label9
+            // lblMoneyOn
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(257, 32);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(85, 13);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Saldo på kontot:";
+            this.lblMoneyOn.AutoSize = true;
+            this.lblMoneyOn.Location = new System.Drawing.Point(257, 32);
+            this.lblMoneyOn.Name = "lblMoneyOn";
+            this.lblMoneyOn.Size = new System.Drawing.Size(85, 13);
+            this.lblMoneyOn.TabIndex = 5;
+            this.lblMoneyOn.Text = "Saldo på kontot:";
             // 
-            // label8
+            // lblChoseAccount
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(158, 35);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(74, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Välj ditt konto:";
+            this.lblChoseAccount.AutoSize = true;
+            this.lblChoseAccount.Location = new System.Drawing.Point(147, 35);
+            this.lblChoseAccount.Name = "lblChoseAccount";
+            this.lblChoseAccount.Size = new System.Drawing.Size(74, 13);
+            this.lblChoseAccount.TabIndex = 4;
+            this.lblChoseAccount.Text = "Välj ditt konto:";
             // 
-            // label7
+            // lblChoseCustomer
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 35);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(93, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Välj dig som kund:";
+            this.lblChoseCustomer.AutoSize = true;
+            this.lblChoseCustomer.Location = new System.Drawing.Point(11, 35);
+            this.lblChoseCustomer.Name = "lblChoseCustomer";
+            this.lblChoseCustomer.Size = new System.Drawing.Size(93, 13);
+            this.lblChoseCustomer.TabIndex = 4;
+            this.lblChoseCustomer.Text = "Välj dig som kund:";
             // 
             // tbxDisplayMoney
             // 
@@ -490,9 +495,9 @@
         private System.Windows.Forms.Button btnConfirmTransaction;
         private System.Windows.Forms.TextBox tbxTransactionValue;
         private System.Windows.Forms.Button btnAddNewAccount;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblMoneyOn;
+        private System.Windows.Forms.Label lblChoseAccount;
+        private System.Windows.Forms.Label lblChoseCustomer;
         private System.Windows.Forms.GroupBox grpBoxTransactionHistory;
         private System.Windows.Forms.ListBox lbxTransactionsList;
         private System.Windows.Forms.Panel pnlAddAccount;
