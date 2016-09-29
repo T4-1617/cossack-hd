@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webbsida2", "webbsida2\webbsida2.csproj", "{B16737A0-C057-47F7-81ED-7D305687D07F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B16737A0-C057-47F7-81ED-7D305687D07F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B16737A0-C057-47F7-81ED-7D305687D07F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B16737A0-C057-47F7-81ED-7D305687D07F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B16737A0-C057-47F7-81ED-7D305687D07F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
